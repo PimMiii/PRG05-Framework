@@ -5,10 +5,13 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <title>Document</title>
 </head>
 <body>
 <h1>HOI</h1>
 <p>the time is {{ $currentTime }}</p>
+<p>test</p>
+<h2>test</h2>
 </body>
 </html>
