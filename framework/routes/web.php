@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\BeerController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,4 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/beers', [App\Http\Controllers\BeerController::class, 'index'])->name('index');
