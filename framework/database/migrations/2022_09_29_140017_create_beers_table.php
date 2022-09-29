@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('beers', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->smallInteger('percentage', unsigned: true);
             $table->text('description');
             $table->timestamps();
         });
