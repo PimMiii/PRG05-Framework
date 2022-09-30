@@ -20,4 +20,8 @@ class Beer extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function alcoholAttribute(){
+        return $this->percentage/100;
+    }
 }
