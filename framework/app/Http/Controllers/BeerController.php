@@ -12,4 +12,9 @@ class BeerController extends Controller
         return view('beers', compact('beers'));
 
     }
+
+    public function details($id) {
+        $beer = Beer::find($id);
+        return view('beer', compact('beer'));
+    }
 }

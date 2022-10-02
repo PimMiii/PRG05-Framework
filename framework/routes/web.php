@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeerController;
+use App\Http\Controllers\CategoriesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,7 +18,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-Route::get('/', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/beers', [App\Http\Controllers\BeerController::class, 'index'])->name('index');
-Route::get('/categories', [\App\Http\Controllers\CategoriesController::class, 'show'])->name('show');
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('/beers', [BeerController::class, 'index'])->name('beersIndex');
+Route::get('/beer/{id}', [BeerController::class, 'details'])->name('beerDetails');
+
+Route::get('/categories', [CategoriesController::class, 'index'])->name('categoriesIndex');
+Route::get('/category/{id}', [CategoriesController::class, 'details'])->name('categoryDetails');

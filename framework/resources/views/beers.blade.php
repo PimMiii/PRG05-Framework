@@ -7,12 +7,12 @@
                 @foreach($beers as $beer)
                     <div class="card">
 
-                        <div class="card-header"><h1>{{$beer->name}}</h1></div>
+                        <div class="card-header"><h1><a href="{{route('beerDetails', ['id'=>$beer->id])}}">{{$beer->name}}</a></h1></div>
                         <div class="card-body">
                             <h2>{{number_format($beer->percentage/100, 2)}}%</h2>
                             <h3>
                                 @foreach($beer->categories as $category)
-                                    {{$category->name}},
+                                    <a href="{{route('categoryDetails', ['id'=>$category->id])}}">{{$category->name}}</a>,
                                 @endforeach
                             </h3>
                             <p>{{$beer->description}}</p>
