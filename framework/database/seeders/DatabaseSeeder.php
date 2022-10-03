@@ -17,9 +17,11 @@ class DatabaseSeeder extends Seeder
         // \App\Models\User::factory(10)->create();
 
          \App\Models\User::factory()->create([
-             'name' => 'Default User',
-             'email' => 'default@user.net',
+             'name' => env('INITIAL_USER_NAME'),
+             'email' => env('INITIAL_USER_EMAIL'),
+             'password' => bcrypt(env('INITIAL_USER_PASSWORD'))
          ]);
+
         $this->call([
             BrewersSeeder::class,
             BeerSeeder::class,
