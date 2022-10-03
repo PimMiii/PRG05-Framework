@@ -16,6 +16,7 @@ class BeerSeeder extends Seeder
      */
     public function run()
     {
+        if(DB::table('beers')->count()==0){
         $beers = [
             [
                 'brewer_id' => 1,
@@ -86,6 +87,9 @@ class BeerSeeder extends Seeder
 
         ];
         DB::table('beers')->insert($beers);
+    } else {
+            echo("ERROR:Table(beers) NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
+        }
     }
 
 }

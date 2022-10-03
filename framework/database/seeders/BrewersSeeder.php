@@ -16,6 +16,7 @@ class BrewersSeeder extends Seeder
      */
     public function run()
     {
+        if(DB::table('brewers')->count()==0){
         $data = [
             [
                 'name' => 'Heineken Nederland',
@@ -56,5 +57,8 @@ class BrewersSeeder extends Seeder
 
         ];
         DB::table('brewers')->insert($data);
+    } else {
+            echo("ERROR:Table(brewers) NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
+        }
     }
 }

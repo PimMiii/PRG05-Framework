@@ -17,6 +17,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
+        if(DB::table('categories')->count()==0){
         $data =[
             [
                 'name' => 'Pilsener',
@@ -30,5 +31,8 @@ class CategorySeeder extends Seeder
             ]
         ];
         DB::table('categories')->insert($data);
+    } else {
+            echo("ERROR:Table(categories) NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
+        }
     }
 }

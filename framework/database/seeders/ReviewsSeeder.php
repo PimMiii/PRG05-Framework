@@ -16,6 +16,7 @@ class ReviewsSeeder extends Seeder
      */
     public function run()
     {
+        if(DB::table('reviews')->count()==0){
         $data = [
             [
                 'beer_id' => 1,
@@ -27,5 +28,8 @@ class ReviewsSeeder extends Seeder
             ],
         ];
         DB::table('reviews')->insert($data);
+    } else {
+            echo("ERROR:Table(reviews) NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
+        }
     }
 }
