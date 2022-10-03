@@ -15,6 +15,7 @@
                                 <a href="{{route('categoryDetails', ['id'=>$category->id])}}">{{$category->name}}</a>,
                             @endforeach
                         </p>
+                        {{--Reviews--}}
                         <div class="col-md-8">
                             <div class="card">
                                 @foreach($beer->reviews as $review)
