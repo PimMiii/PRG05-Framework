@@ -7,7 +7,8 @@
                 <div class="card">
                     <div class="card-header"><h1>{{$beer->name}}</h1></div>
                     <div class="card-body">
-                        <p><bold>Alcohol: </bold>{{number_format($beer->percentage/100, 2)}}%</p>
+                        <h2><a href="{{route('brewerDetails', ['id'=>$beer->brewer_id])}}">{{$beer->brewer->name}}</a></h2>
+                        <h3><bold>Alcohol: </bold>{{number_format($beer->percentage/100, 2)}}%</h3>
                         <h3>Beschrijving:</h3>
                         <p>{{$beer->description}}</p>
                         <p>
@@ -31,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <p><a href="{{route('beersIndex')}}">Terug naar Bieren</a> </p>
+                <p><a href="{{route('beersIndex')}}">Terug naar Bieren</a></p>
             </div>
         </div>
     </div>

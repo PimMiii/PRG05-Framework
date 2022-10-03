@@ -3,6 +3,7 @@
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\BrewersController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -26,3 +27,6 @@ Route::get('/beer/{id}', [BeerController::class, 'details'])->name('beerDetails'
 
 Route::get('/categories', [CategoriesController::class, 'index'])->name('categoriesIndex');
 Route::get('/category/{id}', [CategoriesController::class, 'details'])->name('categoryDetails');
+
+Route::get('/brewers', [BrewersController::class, 'index'])->name('brewersIndex');
+Route::get('/brewer/{id}', [BrewersController::class, 'details'])->name('brewerDetails');
