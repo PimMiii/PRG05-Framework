@@ -15,7 +15,6 @@ class BrewersSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('brewers')->delete();
         $data = [
             [
               'name' => 'Heineken Nederland'

@@ -15,7 +15,6 @@ class BeerCategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('beer_category')->delete();
         $data = [
             [
                 'beer_id' => 1,

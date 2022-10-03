@@ -15,7 +15,6 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        DB::table('categories')->delete();
         $data =[
             [
                 'name' => 'Pilsener'
