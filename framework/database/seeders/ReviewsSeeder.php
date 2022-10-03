@@ -26,6 +26,22 @@ class ReviewsSeeder extends Seeder
                 'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                 'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
             ],
+            [
+                'beer_id' => 2,
+                'user_id' => 1,
+                'rating' => 80,
+                'comment' => 'Kijk uit! Dit gerstenat brand zo een gat in je portemonnee, aangezien je deze kan blijven drinken.',
+                'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
+                'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
+            ],
+            [
+                'beer_id' => 3,
+                'user_id' => 1,
+                'rating' => 90,
+                'comment' => 'Je waant jezelf een échte Hertog, tijdens het nuttigen van deze goudgele rakker! ',
+                'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
+                'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
+            ],
         ];
         DB::table('reviews')->insert($data);
     } else {
