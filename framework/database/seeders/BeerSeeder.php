@@ -22,7 +22,7 @@ class BeerSeeder extends Seeder
                 'brewer_id' => 1,
                 'name' => 'Heineken Pilsener',
                 'percentage' => 500,
-                'description' => 'Heineken Pilsener is beroemd over de hele wereld.'.
+                'description' => 'Heineken Pilsener is beroemd over de hele wereld. '.
                     'Bekend vanwege zijn kenmerkende smaak, die vooral te danken is aan de Heineken A-gist.',
                 'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                 'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
