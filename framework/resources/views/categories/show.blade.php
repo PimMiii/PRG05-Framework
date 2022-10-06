@@ -5,14 +5,14 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h1>{{$brewer->name}}</h1></div>
+                    <div class="card-header"><h1>{{$category->name}}</h1></div>
                     <div class="card-body">
-                        @foreach($brewer->beers as $beer)
-                            <p><a href="{{route('beerDetails', ['id'=>$beer->id])}}">{{$beer->name}}</a></p>
+                        @foreach($category->beers as $beer)
+                            <p><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></p>
                         @endforeach
                     </div>
                 </div>
-                <p><a href="{{route('brewersIndex')}}">Terug naar Brouwerijen</a></p>
+                <p><a href="/categories/">Terug naar Categorieën</a></p>
             </div>
         </div>
     </div>

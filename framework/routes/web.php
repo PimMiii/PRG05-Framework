@@ -22,11 +22,8 @@ Auth::routes();
 Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::get('/beers', [BeerController::class, 'index'])->name('beersIndex');
-Route::get('/beer/{id}', [BeerController::class, 'details'])->name('beerDetails');
+Route::resource('beers', BeerController::class);
 
-Route::get('/categories', [CategoriesController::class, 'index'])->name('categoriesIndex');
-Route::get('/category/{id}', [CategoriesController::class, 'details'])->name('categoryDetails');
+Route::resource('categories', CategoriesController::class);
 
-Route::get('/brewers', [BrewersController::class, 'index'])->name('brewersIndex');
-Route::get('/brewer/{id}', [BrewersController::class, 'details'])->name('brewerDetails');
+Route::resource('brewers', BrewersController::class);

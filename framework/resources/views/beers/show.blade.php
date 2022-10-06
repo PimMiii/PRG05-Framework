@@ -7,13 +7,13 @@
                 <div class="card">
                     <div class="card-header"><h1>{{$beer->name}}</h1></div>
                     <div class="card-body">
-                        <h2><a href="{{route('brewerDetails', ['id'=>$beer->brewer_id])}}">{{$beer->brewer->name}}</a></h2>
+                        <h2><a href="/brewers/{{$beer->brewer_id}}">{{$beer->brewer->name}}</a></h2>
                         <h3><bold>Alcohol: </bold>{{number_format($beer->percentage/100, 2)}}%</h3>
                         <h3>Beschrijving:</h3>
                         <p>{{$beer->description}}</p>
                         <p>
                             @foreach($beer->categories as $category)
-                                <a href="{{route('categoryDetails', ['id'=>$category->id])}}">{{$category->name}}</a>,
+                                <a href="/categories/{{$category->id}}">{{$category->name}}</a>,
                             @endforeach
                         </p>
                         {{--Reviews--}}
@@ -32,7 +32,7 @@
                         </div>
                     </div>
                 </div>
-                <p><a href="{{route('beersIndex')}}">Terug naar Bieren</a></p>
+                <p><a href="/beers">Terug naar Bieren</a></p>
             </div>
         </div>
     </div>

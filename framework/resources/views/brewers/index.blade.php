@@ -6,10 +6,10 @@
             <div class="col-md-8">
                 @foreach($brewers as $brewer)
                     <div class="card">
-                        <div class="card-header"><h1><a href="{{route('brewerDetails', ['id'=>$brewer->id])}}">{{$brewer->name}}</a></h1></div>
+                        <div class="card-header"><h1><a href="/brewers/{{$brewer->id}}">{{$brewer->name}}</a></h1></div>
                         <div class="card-body">
                             @foreach($brewer->beers as $beer)
-                                <p><a href="{{route('beerDetails', ['id'=>$beer->id])}}">{{$beer->name}}</a></p>
+                                <p><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></p>
                             @endforeach
                         </div>
                     </div>

@@ -9,12 +9,12 @@ class BeerController extends Controller
 {
     public function index() {
         $beers = Beer::all();
-        return view('beers', compact('beers'));
+        return view('beers.index', compact('beers'));
 
     }
 
-    public function details($id) {
+    public function show($id) {
         $beer = Beer::find($id);
-        return view('beer', compact('beer'));
+        return view('beers.show', compact('beer'));
     }
 }

@@ -9,11 +9,11 @@ class CategoriesController extends Controller
 {
     public function index(){
         $categories = Category::all();
-        return view('categories', compact('categories'));
+        return view('categories.index', compact('categories'));
     }
 
-    public function details($id){
+    public function show($id){
         $category = Category::find($id);
-        return view('category', compact('category'));
+        return view('categories.show', compact('category'));
     }
 }
