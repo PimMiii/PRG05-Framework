@@ -1,0 +1,1 @@
+{{-- Create a Beer page }}
