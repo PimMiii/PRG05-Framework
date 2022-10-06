@@ -17,4 +17,7 @@ class BrewersController extends Controller
         $brewer = Brewer::find($id);
         return view('brewers.show', compact('brewer'));
     }
+    public function create() {
+        return view('brewers.create');
+    }
 }

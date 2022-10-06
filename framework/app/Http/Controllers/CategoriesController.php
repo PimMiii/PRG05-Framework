@@ -16,4 +16,7 @@ class CategoriesController extends Controller
         $category = Category::find($id);
         return view('categories.show', compact('category'));
     }
+    public function create() {
+        return view('categories.create');
+    }
 }
