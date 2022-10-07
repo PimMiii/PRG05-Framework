@@ -1,1 +1,5 @@
-{{-- Create a Brewer page }}
+@extends('layouts.app')
+@section('content')
+    {{-- Create a Beer page.--}}
+
+@endsection
