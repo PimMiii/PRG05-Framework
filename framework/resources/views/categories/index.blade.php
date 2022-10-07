@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <p><a href="/categories/create">Categorie toevoegen</a></p>
                 @foreach($categories as $category)
                     <div class="card">
                         <div class="card-header"><h1><a href="/categories/{{$category->id}}">{{$category->name}}</a></h1></div>

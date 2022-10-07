@@ -19,4 +19,15 @@ class CategoriesController extends Controller
     public function create() {
         return view('categories.create');
     }
+    public function store(Request $request)
+    {
+        //validate request data
+        $this->validate($request,
+            [
+                'name' => 'bail|required|unique:beers|max:255',
+                'description' => 'nullable'
+            ]);
+        Category::create($request->all());
+        return redirect('/categories/');
+    }
 }

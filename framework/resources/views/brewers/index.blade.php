@@ -4,6 +4,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
+                <p><a href="/brewers/create">Brouwerij toevoegen</a></p>
                 @foreach($brewers as $brewer)
                     <div class="card">
                         <div class="card-header"><h1><a href="/brewers/{{$brewer->id}}">{{$brewer->name}}</a></h1></div>
