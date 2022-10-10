@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeerController;
-use App\Http\Controllers\CategoriesController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrewersController;
 use Illuminate\Support\Facades\Route;
 
@@ -24,6 +24,6 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('beers', BeerController::class);
 
-Route::resource('categories', CategoriesController::class);
+Route::resource('categories', CategoryController::class);
 
 Route::resource('brewers', BrewersController::class);
