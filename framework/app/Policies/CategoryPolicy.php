@@ -12,7 +12,7 @@ class CategoryPolicy
     use HandlesAuthorization;
 
     public function before(User $user){
-     if($user->role === 1){
+     if($user->is_admin === 1){
          return Response::allow();
      }
     }
