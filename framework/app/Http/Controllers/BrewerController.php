@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Brewer;
 use Illuminate\Http\Request;
 
-class BrewersController extends Controller
+class BrewerController extends Controller
 {
     public function __construct()
     {
