@@ -47,9 +47,7 @@
                                 </div>
                             @endif
                             <input type="submit" value="Opslaan">
-
                         </form>
-
                     </div>
                 </div>
                 @can('delete', $category)
@@ -71,8 +69,6 @@
                                    value="{{$category->id}}">
                             <input type="submit" value="JA, ik weet het zeker!" class="bg-warning" >
                         </form>
-
-
                     </div>
                 </div>
                 @endcan
