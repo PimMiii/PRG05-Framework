@@ -47,4 +47,40 @@ class BeerController extends Controller
         Beer::create($request->all());
         return redirect(route('beers.index'));
     }
+
+
+    public function edit($id)
+    {
+        $beer = Beer::find($id);
+        return view('beers.edit', compact('beer'));
+    }
+
+
+    public function update(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:beers',
+                'name' => 'bail|required|max:255',
+                'percentage' => 'bail|required|numeric|max:10000',
+                'description' => 'nullable'
+            ]);
+        $beer = Beer::find($validated['id']);
+        $beer->name = $validated['name'];
+        $beer->percentage = $validated['percentage']*100;
+        $beer->description = $validated['description'];
+        $beer->save();
+        return redirect(route('beers.show', $beer->id));
+    }
+
+
+    public function destroy(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:beers'
+            ]);
+        Beer::destroy($validated['id']);
+        return redirect('/beers');
+    }
 }

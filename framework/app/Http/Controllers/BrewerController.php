@@ -44,6 +44,13 @@ class BrewerController extends Controller
         return view('brewers.show', compact('brewer'));
     }
 
+
+    public function edit($id)
+    {
+        $brewer = Brewer::find($id);
+        return view('brewers.edit', compact('brewer'));
+    }
+
     public function update(Request $request)
     {
         $validated = $this->validate($request,
@@ -64,7 +71,7 @@ class BrewerController extends Controller
     {
         $validated = $this->validate($request,
             [
-                'id' => 'bail|required|exists:categories'
+                'id' => 'bail|required|exists:brewers'
             ]);
         Brewer::destroy($validated['id']);
         return redirect(route('brewers.index'));

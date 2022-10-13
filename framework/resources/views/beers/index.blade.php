@@ -4,13 +4,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                @can('create', Beer::class)
+                @can('create', \App\Models\Beer::class)
                     <p><a href="/beers/create">Bier toevoegen</a></p>
                 @endcan
                 @foreach($beers as $beer)
                     <div class="card">
-
-                        <div class="card-header"><h1><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></h1></div>
+                        <div class="card-header"><h1><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></h1>
+                        @can('update', $beer)
+                            <a href="{{route('beers.edit', $beer->id)}}">Aanpassen</a>
+                        @endcan
+                        </div>
                         <div class="card-body">
                             <h2>{{number_format($beer->percentage/100, 2)}}%</h2>
                             <h3>

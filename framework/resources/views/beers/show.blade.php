@@ -5,9 +5,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"><h1>{{$beer->name}}</h1></div>
+                    <div class="card-header"><h1>{{$beer->name}}</h1>
+                    @can('update', $beer)
+                        <a href="{{route('beers.edit', $beer->id)}}"> Aanpassen</a>
+                    @endcan
+                    </div>
                     <div class="card-body">
-                        <h2><a href="/brewers/{{$beer->brewer_id}}">{{$beer->brewer->name}}</a></h2>
+                        @if($beer->brewer)
+                            <h2><a href="/brewers/{{$beer->brewer_id}}">{{$beer->brewer->name}}</a></h2>
+                        @endif
                         <h3><bold>Alcohol: </bold>{{number_format($beer->percentage/100, 2)}}%</h3>
                         <h3>Beschrijving:</h3>
                         <p>{{$beer->description}}</p>
