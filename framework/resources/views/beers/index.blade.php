@@ -4,7 +4,9 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p><a href="/beers/create">Bier toevoegen</a></p>
+                @can('create', Beer::class)
+                    <p><a href="/beers/create">Bier toevoegen</a></p>
+                @endcan
                 @foreach($beers as $beer)
                     <div class="card">
 
@@ -13,7 +15,10 @@
                             <h2>{{number_format($beer->percentage/100, 2)}}%</h2>
                             <h3>
                                 @foreach($beer->categories as $category)
-                                    <a href="/categories/{{$category->id}}">{{$category->name}}</a>,
+                                    <a href="/categories/{{$category->id}}">{{$category->name}}</a>
+                                    @if($beer->categories->count() > 1)
+                                        ,
+                                    @endif
                                 @endforeach
                             </h3>
                             <p>{{$beer->description}}</p>

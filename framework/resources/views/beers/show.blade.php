@@ -13,7 +13,10 @@
                         <p>{{$beer->description}}</p>
                         <p>
                             @foreach($beer->categories as $category)
-                                <a href="/categories/{{$category->id}}">{{$category->name}}</a>,
+                                <a href="/categories/{{$category->id}}">{{$category->name}}</a>
+                                @if($beer->categories->count() > 1)
+                                    ,
+                                @endif
                             @endforeach
                         </p>
                         {{--Reviews--}}
