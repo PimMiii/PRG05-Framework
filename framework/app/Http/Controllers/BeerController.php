@@ -81,6 +81,6 @@ class BeerController extends Controller
                 'id' => 'bail|required|exists:beers'
             ]);
         Beer::destroy($validated['id']);
-        return redirect('/beers');
+        return redirect(route('beers.index'));
     }
 }

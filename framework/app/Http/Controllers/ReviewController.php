@@ -22,8 +22,23 @@ class ReviewController extends Controller
 
     public function store(Request $request)
     {
-        //
+        //percentage needs to be adjusted for database. [rating * 10]
+        $data = $request->all();
+        $data['rating'] *= 10;
+        $request->merge($data);
+
+        //validate request data
+        $this->validate($request,
+            [
+                'rating' => 'bail|required|numeric|max:100|min:10',
+                'comment' => 'nullable',
+                'beer_id' => 'bail|required|numeric|exists:beers,id',
+                'user_id' => 'bail|required|numeric|exists:users,id'
+            ]);
+        Review::create($request->all());
+        return redirect(route('beers.show', $request->all()['beer_id']));
     }
+
 
 
     public function show(int $id)
@@ -35,18 +50,36 @@ class ReviewController extends Controller
 
     public function edit(int $id)
     {
-        //
+        $review = Review::find($id);
+        return view('reviews.edit', compact('review'));
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, int $id)
     {
-        //
+        $validated = $this->validate($request,
+            [
+                'rating' => 'bail|required|numeric|max:10|min:1',
+                'comment' => 'nullable',
+            ]);
+        $review = Review::find($id);
+        $review->rating = $validated['rating']*10;
+        $review->comment = $validated['comment'];
+        $review->save();
+        return redirect(route('beers.show', $review->beer_id));
     }
 
 
     public function destroy(Request $request)
     {
-        //
+
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:reviews'
+            ]);
+        $review = Review::find($validated['id']);
+        $beer_id = $review->beer_id;
+        $review->delete();
+        return redirect(route('beers.show', $beer_id));
     }
 }
