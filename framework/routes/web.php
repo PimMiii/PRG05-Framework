@@ -4,6 +4,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\BrewerController;
+use App\Http\Controllers\ReviewController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -27,3 +28,5 @@ Route::resource('beers', BeerController::class);
 Route::resource('categories', CategoryController::class);
 
 Route::resource('brewers', BrewerController::class);
+
+Route::resource('reviews', ReviewController::class);

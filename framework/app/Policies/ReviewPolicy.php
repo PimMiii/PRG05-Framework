@@ -20,7 +20,7 @@ class ReviewPolicy
 
     public function viewAny(?User $user)
     {
-        return Response::allow();
+        return Response::denyAsNotFound();
     }
 
 
@@ -32,20 +32,35 @@ class ReviewPolicy
 
     public function create(User $user)
     {
-        return Response::denyWithStatus(404);
+        if($user->is_verified === 1){
+            return Response::allow();
+        } else {
+            return Response::deny();
+        }
     }
 
 
-    public function update(User $user)
+    public function update(User $user, int $id)
     {
-        return Response::denyWithStatus(404);
+        $review = Review::find($id);
+        if($review->user_id === $user->id){
+            return Response::allow();
+        } else {
+            return Response::deny();
+        }
     }
 
 
-    public function delete(User $user)
+    public function delete(User $user, int $id)
     {
-        return Response::denyWithStatus(404);
+        $review = Review::find($id);
+        if($review->user_id === $user->id){
+            return Response::allow();
+        } else {
+            return Response::deny();
+        }
     }
+
 
 
     public function restore(User $user)
