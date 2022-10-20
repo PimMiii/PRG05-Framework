@@ -10,6 +10,7 @@
                 @foreach($beers as $beer)
                     <div class="card">
                         <div class="card-header"><h1><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></h1>
+                            <h3>Rating: {{number_format(($beer->calculateRating()/10), 1)}}/10</h3>
                         @can('update', $beer)
                             <a href="{{route('beers.edit', $beer->id)}}">Aanpassen</a>
                         @endcan

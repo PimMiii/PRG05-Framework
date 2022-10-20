@@ -6,17 +6,9 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h1>{{$beer->name}}</h1>
-                        @if($beer->reviews->count() > 0)
-                        @php
-                            $beerRating = 0
-                        @endphp
-                        @foreach($beer->reviews as $review)
-                            @php
-                                $beerRating = $beerRating + $review->rating
-                            @endphp
-                        @endforeach
-                        <h3>Rating: {{number_format(($beerRating / $beer->reviews->count())/10, 1)}}/10</h3>
-                        @endif
+
+                        <h3>Rating: {{number_format(($beer->calculateRating()/10), 1)}}/10</h3>
+
                     @can('update', $beer)
                         <a href="{{route('beers.edit', $beer->id)}}"> Aanpassen</a>
                     @endcan

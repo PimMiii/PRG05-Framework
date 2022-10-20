@@ -22,4 +22,15 @@ class Beer extends Model
     public function categories(){
         return $this->belongsToMany(Category::class);
     }
+
+    public function calculateRating() {
+        $rating = 0;
+        foreach($this->reviews as $review){
+            $rating += $review->rating;
+        }
+        if($this->reviews->count() > 0) {
+            $rating = $rating / $this->reviews->count();
+        }
+        return $rating;
+    }
 }
