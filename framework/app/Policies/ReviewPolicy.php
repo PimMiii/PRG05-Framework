@@ -6,6 +6,7 @@ use App\Models\Review;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Ramsey\Uuid\Type\Integer;
 
 class ReviewPolicy
 {
@@ -40,9 +41,9 @@ class ReviewPolicy
     }
 
 
-    public function update(User $user, int $id)
+    public function update(User $user, Review $review)
     {
-        $review = Review::find($id);
+
         if($review->user_id === $user->id){
             return Response::allow();
         } else {
@@ -51,9 +52,8 @@ class ReviewPolicy
     }
 
 
-    public function delete(User $user, int $id)
+    public function delete(User $user, Review $review)
     {
-        $review = Review::find($id);
         if($review->user_id === $user->id){
             return Response::allow();
         } else {
@@ -69,7 +69,7 @@ class ReviewPolicy
     }
 
 
-    public function forceDelete(User $user)
+    public function forceDelete(User $user, Review $review)
     {
         return Response::denyWithStatus(404);
     }

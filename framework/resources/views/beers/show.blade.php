@@ -88,7 +88,9 @@
                                         <bold>{{number_format($review->rating/10, 1)}} /10</bold>
                                     </div>
                                     <div class="card-body">
+                                        @can('update', $review)
                                         <p><a href="{{route('reviews.edit', $review->id)}}">Aanpassen</a> </p>
+                                        @endcan
                                         <p>{{$review->comment}}</p>
                                     </div>
                                 @endforeach
