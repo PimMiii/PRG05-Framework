@@ -9,15 +9,17 @@
 
                         <h3>Rating: {{number_format($beer->calculateRating(), 1)}}/10</h3>
 
-                    @can('update', $beer)
-                        <a href="{{route('beers.edit', $beer->id)}}"> Aanpassen</a>
-                    @endcan
+                        @can('update', $beer)
+                            <a href="{{route('beers.edit', $beer->id)}}"> Aanpassen</a>
+                        @endcan
                     </div>
                     <div class="card-body">
                         @if($beer->brewer)
                             <h2><a href="/brewers/{{$beer->brewer_id}}">{{$beer->brewer->name}}</a></h2>
                         @endif
-                        <h3><bold>Alcohol: </bold>{{number_format($beer->percentage/100, 2)}}%</h3>
+                        <h3>
+                            <bold>Alcohol:</bold>{{number_format($beer->percentage/100, 2)}}%
+                        </h3>
                         <h3>Beschrijving:</h3>
                         <p>{{$beer->description}}</p>
                         <p>
@@ -31,11 +33,11 @@
                         {{--Reviews--}}
                         <div class="col-md-8">
                             <div class="card">
-                                @can('create', \App\Models\Review::class)
-                                    <div class="card-header">
-                                        <bold>Laat een review achter</bold>
-                                    </div>
-                                    <div class="card-body">
+                                <div class="card-header">
+                                    <bold>Laat een review achter</bold>
+                                </div>
+                                <div class="card-body">
+                                    @can('create', \App\Models\Review::class)
                                         <form action="{{route('reviews.store')}}" method="POST">
                                             @csrf
                                             <label for="rating">Rating: </label>
@@ -80,26 +82,36 @@
                                             @endif
                                             <input type="submit" value="Review plaatsen">
                                         </form>
-                                    </div>
-                                @endcan
-                                @foreach($beer->reviews as $review)
+                                    @endcan
+                                    @cannot('create', \App\Models\Review::class)
+                                        @if(Auth::user())
+                                            Verifieer uw account om een Review achter te laten
+                                        @else
+                                            Login of Registreer een account om een Review achter te laten
+                                        @endif
+                                    @endcannot
+                                </div>
+                            </div>
+                            @foreach($beer->reviews as $review)
+                                <div class="card">
                                     <div class="card-header">
                                         <bold>{{$review->user->name}}</bold>
                                         <bold>{{number_format($review->rating/10, 1)}} /10</bold>
                                     </div>
                                     <div class="card-body">
                                         @can('update', $review)
-                                        <p><a href="{{route('reviews.edit', $review->id)}}">Aanpassen</a> </p>
+                                            <p><a href="{{route('reviews.edit', $review->id)}}">Aanpassen</a></p>
                                         @endcan
                                         <p>{{$review->comment}}</p>
                                     </div>
-                                @endforeach
-                            </div>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
-                <p><a href="/beers">Terug naar Bieren</a></p>
             </div>
+            <p><a href="/beers">Terug naar Bieren</a></p>
         </div>
+    </div>
     </div>
 @endsection
