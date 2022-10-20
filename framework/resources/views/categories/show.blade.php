@@ -12,7 +12,6 @@
                         @endforeach
                     </div>
                 </div>
-                <p><a href="/categories/">Terug naar Categorieën</a></p>
             </div>
         </div>
     </div>

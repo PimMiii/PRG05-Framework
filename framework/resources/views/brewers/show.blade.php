@@ -12,7 +12,6 @@
                         @endforeach
                     </div>
                 </div>
-                <p><a href="/brewers">Terug naar Brouwerijen</a></p>
             </div>
         </div>
     </div>

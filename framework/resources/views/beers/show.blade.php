@@ -110,8 +110,6 @@
                     </div>
                 </div>
             </div>
-            <p><a href="/beers">Terug naar Bieren</a></p>
         </div>
-    </div>
     </div>
 @endsection
