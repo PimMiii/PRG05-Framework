@@ -24,13 +24,13 @@ class Beer extends Model
     }
 
     public function calculateRating() {
-        $rating = 0;
+        $this->rating = 0;
         foreach($this->reviews as $review){
-            $rating += $review->rating;
+            $this->rating += $review->rating;
         }
         if($this->reviews->count() > 0) {
-            $rating = $rating / $this->reviews->count();
+            $this->rating = $this->rating / $this->reviews->count();
         }
-        return $rating;
+        return $this->rating/10;
     }
 }
