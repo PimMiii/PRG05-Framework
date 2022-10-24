@@ -15,26 +15,27 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        if(DB::table('users')->count() == 0){
-        // \App\Models\User::factory(10)->create();
+        if (DB::table('users')->count() == 0) {
+            /* // \App\Models\User::factory(10)->create();
 
-         \App\Models\User::factory()->create([
-             'name' => env('INITIAL_USER_NAME'),
-             'email' => env('INITIAL_USER_EMAIL'),
-             'password' => bcrypt(env('INITIAL_USER_PASSWORD')),
-             'is_admin' => 1,
+              \App\Models\User::factory()->create([
+                  'name' => env('INITIAL_USER_NAME'),
+                  'email' => env('INITIAL_USER_EMAIL'),
+                  'password' => bcrypt(env('INITIAL_USER_PASSWORD')),
+                  'is_admin' => 1,
 
-         ]);
+              ]);*/
 
-        $this->call([
-            BrewersSeeder::class,
-            BeerSeeder::class,
-            CategorySeeder::class,
-            BeerCategorySeeder::class,
-            ReviewsSeeder::class
-        ]);
-    } else {
-        echo("ERROR:Database NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
+            $this->call([
+                UserSeeder::class,
+                BrewersSeeder::class,
+                BeerSeeder::class,
+                CategorySeeder::class,
+                BeerCategorySeeder::class,
+                ReviewsSeeder::class
+            ]);
+        } else {
+            echo("ERROR:Database NOT empty. Use: `php artisan migrate:fresh --seed` NOTE: WILL DELETE ALL DATA");
         }
     }
 }

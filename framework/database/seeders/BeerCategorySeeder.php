@@ -53,6 +53,12 @@ class BeerCategorySeeder extends Seeder
                     'category_id' => 2,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
+                ],
+                [
+                    'beer_id' => 7,
+                    'category_id' => 3,
+                    'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
+                    'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ]
 
             ];
