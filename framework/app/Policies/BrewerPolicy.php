@@ -3,9 +3,11 @@
 namespace App\Policies;
 
 use App\Models\Brewer;
+use App\Models\Category;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Http\Client\Request;
 
 class BrewerPolicy
 {
@@ -32,30 +34,34 @@ class BrewerPolicy
 
     public function create(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
-    public function update(User $user)
+    public function update(User $user, Brewer $brewer)
     {
-        return Response::denyWithStatus(404);
+       return $brewer->user_id === $user->id
+           ? Response::allow()
+           : Response::deny();
     }
 
 
-    public function delete(User $user)
+    public function delete(User $user, Brewer $brewer)
     {
-        return Response::denyWithStatus(404);
+        return $brewer->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 
 
     public function restore(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function forceDelete(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 }

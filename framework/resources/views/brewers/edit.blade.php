@@ -8,8 +8,8 @@
                         <h1>Brouwerij aanpassen</h1>
                     </div>
                     <div class="card-body">
-
-                        <form action="/brewers/{{$brewer->id}}" method="POST">
+                        {{--Form--}}
+                        <form action="{{route('brewers.update')}}" method="POST">
                             @method('PUT')
                             @csrf
                             <input id="id"
@@ -35,6 +35,20 @@
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
+                            <br>
+                            {{--Only show dropdown to admin--}}
+                            @if(Auth::user()->is_admin === 1)
+                            <label for="user_id">Kies een nieuwe Brouwerij Eigenaar:</label>
+                            <select name="user_id" id="user_id">
+                                @foreach($users as $user)
+                                    @if($user->id === $brewer->user_id)
+                                        <option selected value="{{$user->id}}">{{$user->name}}</option>
+                                    @else
+                                        <option value="{{$user->id}}">{{$user->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @endif
                             <br>
                             @if ($errors->any())
                                 <div class="alert alert-danger">

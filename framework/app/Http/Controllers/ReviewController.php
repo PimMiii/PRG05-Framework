@@ -25,17 +25,18 @@ class ReviewController extends Controller
         //percentage needs to be adjusted for database. [rating * 10]
         $data = $request->all();
         $data['rating'] *= 10;
+        $data['user_id'] = \Auth::id();
         $request->merge($data);
 
         //validate request data
-        $this->validate($request,
+        $validated = $this->validate($request,
             [
                 'rating' => 'bail|required|numeric|max:100|min:10',
                 'comment' => 'nullable',
                 'beer_id' => 'bail|required|numeric|exists:beers,id',
-                'user_id' => 'bail|required|numeric|exists:users,id'
+                'user_id' => 'bail|required|numeric|min:1|'
             ]);
-        Review::create($request->all());
+        Review::create($validated);
         return redirect(route('beers.show', $request->all()['beer_id']));
     }
 

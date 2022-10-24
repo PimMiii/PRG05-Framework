@@ -2,10 +2,12 @@
 
 namespace App\Policies;
 
+use App\Models\Beer;
 use App\Models\Review;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
+use Illuminate\Support\Facades\Request;
 use Ramsey\Uuid\Type\Integer;
 
 class ReviewPolicy
@@ -33,32 +35,25 @@ class ReviewPolicy
 
     public function create(User $user)
     {
-        if($user->is_verified === 1){
-            return Response::allow();
-        } else {
-            return Response::deny();
-        }
+        return $user->is_verified === 1
+                ? Response::allow()
+                : Response::deny();
     }
 
 
     public function update(User $user, Review $review)
     {
-
-        if($review->user_id === $user->id){
-            return Response::allow();
-        } else {
-            return Response::deny();
-        }
+        return $review->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 
 
     public function delete(User $user, Review $review)
     {
-        if($review->user_id === $user->id){
-            return Response::allow();
-        } else {
-            return Response::deny();
-        }
+        return $review->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 
 

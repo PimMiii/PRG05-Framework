@@ -4,10 +4,13 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <p><a href="/brewers/create">Brouwerij toevoegen</a></p>
+                @can('create', \App\Models\Brewer::class)
+                    <p><a href="/brewers/create">Brouwerij toevoegen</a></p>
+                @endcan
+
                 @foreach($brewers as $brewer)
                     <div class="card">
-                        <div class="card-header"><h1><a href="/brewers/{{$brewer->id}}">{{$brewer->name}}</a></h1>
+                        <div class="card-header"><h1><a href="{{route('brewers.show', $brewer->id)}}">{{$brewer->name}}</a></h1>
                         @can('update', $brewer)
                             <a href="{{route('brewers.edit', $brewer->id)}}">Aanpassen</a>
                         @endcan

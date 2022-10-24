@@ -8,7 +8,7 @@
                         <h1>Bier aanpassen</h1>
                     </div>
                     <div class="card-body">
-                        <form action="/beers/{{$beer->id}}" method="POST">
+                        <form action="{{route('beers.update', $beer->id)}}" method="POST">
                             @method('PUT')
                             @csrf
                             <input id="id"
@@ -34,7 +34,6 @@
                                    step="0.1"
                                    value="{{doubleval(old("percentage", $beer->percentage))/100}}"
                                    class="@error("percentage") is-invalid @enderror">
-
                             @error("percentage")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -49,6 +48,37 @@
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
+                            <label for="brewer_id">Brouwerij: </label>
+                            <select name="brewer_id" id="brewer_id">
+                                @foreach($brewers as $brewer)
+                                    @if($beer->brewer_id === $brewer->id)
+                                    <option value="{{$brewer->id}}" selected>{{$brewer->name}}</option>
+                                    @else
+                                        <option value="{{$brewer->id}}">{{$brewer->name}}</option>
+                                    @endif
+                                @endforeach
+                            </select>
+                            @error("brewer_id")
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
+                            <br>
+                            Categorieën:
+                            @foreach($categories as $category)
+                                @if($beer->categories->contains($category->id))
+                                <div class="form-check">
+                                    <label class="form-check-label" for="flexCheckChecked">{{$category->name}}</label>
+                                    <input class="form-check-input" type="checkbox" id="flexCheckChecked" name="category_id[]" value="{{$category->id}}" checked>
+                                </div>
+                                @else
+                                    <div class="form-check">
+                                        <label class="form-check-label" for="flexCheckDefault">{{$category->name}}</label>
+                                        <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="category_id[]" value="{{$category->id}}">
+                                    </div>
+                                @endif
+                            @endforeach
+                            @error("category_id[]")
+                            <div class="alert alert-danger">{{ $message }}</div>
+                            @enderror
                             @if ($errors->any())
                                 <div class="alert alert-danger">
                                     <ul>

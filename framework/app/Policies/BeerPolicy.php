@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Models\Beer;
+use App\Models\Brewer;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -32,19 +33,26 @@ class BeerPolicy
 
     public function create(User $user)
     {
-        return Response::denyWithStatus(404);
+        $brewer = Brewer::where('user_id', '=', $user->id)->get();
+        return $brewer->count() > 0
+            ? Response::allow()
+            : Response::deny();
     }
 
 
-    public function update(User $user)
+    public function update(User $user, Beer $beer)
     {
-        return Response::denyWithStatus(404);
+        return $beer->brewer->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 
 
-    public function delete(User $user)
+    public function delete(User $user, Beer $beer)
     {
-        return Response::denyWithStatus(404);
+        return $beer->brewer->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 
 

@@ -9,7 +9,7 @@ class Beer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'percentage', 'description'];
+    protected $fillable = ['name', 'percentage', 'description', 'brewer_id'];
 
     public function brewer(){
         return $this->belongsTo(Brewer::class);

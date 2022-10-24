@@ -9,7 +9,7 @@ class Brewer extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'user_id'];
 
     public function beers(){
         return $this->hasMany(Beer::class);

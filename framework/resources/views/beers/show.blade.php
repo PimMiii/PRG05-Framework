@@ -29,7 +29,20 @@
                             @endforeach
                         </p>
                         {{--Reviews--}}
-                        <div class="col-md-8">
+                            @if($userReview !== null)
+                                <div class="card">
+                                    <div class="card-header">
+                                        <bold>{{$userReview->user->name}}</bold>
+                                        <bold>{{number_format($userReview->rating/10, 1)}} /10</bold>
+                                    </div>
+                                    <div class="card-body">
+                                        @can('update', $userReview)
+                                            <p><a href="{{route('reviews.edit', $userReview->id)}}">Aanpassen</a></p>
+                                        @endcan
+                                        <p>{{$userReview->comment}}</p>
+                                    </div>
+                                </div>
+                            @else
                             <div class="card">
                                 <div class="card-header">
                                     <bold>Laat een review achter</bold>
@@ -65,10 +78,6 @@
                                                    id="beer_id"
                                                    name="beer_id"
                                                    value="{{$beer->id}}">
-                                            <input type="hidden"
-                                                   id="user_id"
-                                                   name="user_id"
-                                                   value="{{auth()->id()}}">
                                             @if ($errors->any())
                                                 <div class="alert alert-danger">
                                                     <ul>
@@ -89,8 +98,13 @@
                                         @endif
                                     @endcannot
                                 </div>
-                            </div>
-                            @foreach($beer->reviews as $review)
+                                @endif
+                                @if($userReview !== null)
+                                    @php($reviews = $beer->reviews->where('id','!=', $userReview->id))
+                                @else
+                                    @php($reviews = $beer->reviews)
+                                @endif
+                            @foreach($reviews as $review)
                                 <div class="card">
                                     <div class="card-header">
                                         <bold>{{$review->user->name}}</bold>

@@ -59,7 +59,7 @@ class CategoryController extends Controller
         $validated = $this->validate($request,
             [
                 'id' => 'bail|required|exists:categories',
-                'name' => 'bail|required|unique:categories|max:255',
+                'name' => 'bail|required|exists:categories|max:255',
                 'description' => 'nullable'
             ]);
         $category = Category::find($validated['id']);

@@ -9,8 +9,7 @@
                         <h1>Nieuwe Brouwerij toevoegen</h1>
                     </div>
                     <div class="card-body">
-
-                        <form action="/brewers" method="POST">
+                        <form action="{{route('brewers.store')}}" method="POST">
                             @csrf
                             <label for="name">Naam: </label>
                             <input id="name"
