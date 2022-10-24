@@ -14,8 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('beer_category', function (Blueprint $table) {
-            $table->foreignId('beer_id')->constrained();
-            $table->foreignId('category_id')->constrained();
+            $table->foreignId('beer_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->timestamps();
         });
     }
