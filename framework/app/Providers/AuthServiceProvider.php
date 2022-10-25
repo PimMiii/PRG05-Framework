@@ -33,7 +33,13 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
         Gate::define('profile-view', function (User $user, User $profile) {
-            return $user->id === $profile->id;
+            return $user->id === $profile->id || $user->is_admin;
+        });
+        Gate::define('profile-edit', function (User $user, User $profile) {
+            return $user->id === $profile->id || $user->is_admin;
+        });
+        Gate::define('profile-verify', function (User $user, User $profile) {
+            return $user->id === $profile->id || $user->is_admin;
         });
     }
 }

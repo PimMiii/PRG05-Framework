@@ -15,7 +15,32 @@ class UserController extends Controller
         } else {
             $profile = User::find($id);
             return view('profile.show', compact('profile'));
-
         }
     }
+
+    public function edit(int $id)
+    { if (!Gate::allows('profile-edit', [\Auth::user(), $id])) {
+        abort(404);
+    } else {
+        $profile = User::find($id);
+        return view('profile.edit', compact('profile'));
+    }}
+
+    public function update(Request $request)
+    {
+        abort(404);
+    }
+
+
+    public function verify(int $id)
+    {
+        abort(404);
+    }
+
+    public function updateVerified(Request $request)
+    {
+        abort(404);
+    }
+
+
 }
