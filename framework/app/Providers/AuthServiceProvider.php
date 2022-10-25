@@ -32,8 +32,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-view', function (User $user) {
             return $user->is_admin;
         });
-        Gate::define('profile-view', function (User $user, User $id) {
-            return $user->id === $id;
+        Gate::define('profile-view', function (User $user, User $profile) {
+            return $user->id === $profile->id;
         });
     }
 }
