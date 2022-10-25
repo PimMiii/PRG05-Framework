@@ -63,6 +63,17 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    @if(Auth::user()->is_admin)
+                                    <a class="dropdown-item" href="{{ route('admin.index') }}">
+                                        Adminportaal
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    @endif
+
+                                    <a class="dropdown-item" href="{{ route('profile.show', Auth::id()) }}">
+                                        Profiel
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

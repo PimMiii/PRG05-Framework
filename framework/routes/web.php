@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\BeerController;
 use App\Http\Controllers\CategoryController;
@@ -30,3 +31,7 @@ Route::resource('categories', CategoryController::class);
 Route::resource('brewers', BrewerController::class);
 
 Route::resource('reviews', ReviewController::class);
+
+Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
+
+Route::get('/profile/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
