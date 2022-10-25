@@ -12,19 +12,19 @@ class UserController extends Controller
     {
         if (!Gate::allows('profile-view', [\Auth::user(), $id])) {
             abort(404);
-        } else {
+        }
             $profile = User::find($id);
             return view('profile.show', compact('profile'));
-        }
+
     }
 
     public function edit(int $id)
     { if (!Gate::allows('profile-edit', [\Auth::user(), $id])) {
         abort(404);
-    } else {
+    }
         $profile = User::find($id);
         return view('profile.edit', compact('profile'));
-    }}
+    }
 
     public function update(Request $request)
     {
