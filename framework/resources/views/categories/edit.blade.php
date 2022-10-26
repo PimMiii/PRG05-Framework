@@ -45,7 +45,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <input type="submit" value="Opslaan">
+                            <input type="submit" value="Opslaan" class="btn btn-primary">
                         </form>
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                                    name="id"
                                    type="hidden"
                                    value="{{$category->id}}">
-                            <input type="submit" value="JA, ik weet het zeker!" class="bg-warning" >
+                            <input type="submit" value="JA, ik weet het zeker!" class="btn btn-danger">
                         </form>
                     </div>
                 </div>

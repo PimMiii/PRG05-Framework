@@ -43,7 +43,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <input type="submit" value="Review updaten">
+                            <input type="submit" value="Review updaten" class="btn btn-primary">
                         </form>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                                        name="id"
                                        type="hidden"
                                        value="{{$review->id}}">
-                                <input type="submit" value="JA, ik weet het zeker!" class="bg-warning" >
+                                <input type="submit" value="JA, ik weet het zeker!" class="btn btn-danger" >
                             </form>
                         </div>
                     </div>
