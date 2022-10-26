@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::table('beers', function (Blueprint $table) {
-            $table->boolean('is_visible')->default(1);
+            $table->boolean('is_visible')->default(1)->after('brewer_id');
         });
     }
 
@@ -26,7 +26,7 @@ return new class extends Migration
     public function down()
     {
         Schema::table('beers', function (Blueprint $table) {
-            $table->dropColumn('is_hidden');
+            $table->dropColumn('is_visible');
         });
     }
 };
