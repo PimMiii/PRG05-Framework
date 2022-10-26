@@ -25,8 +25,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('beers', BeerController::class);
+Route::patch('/beers/{id}/toggle_visibility', [BeerController::class, 'toggleVisibility'])->name('beers.toggle-visibility');
 
 Route::resource('categories', CategoryController::class);
+Route::patch('/categories/{id}/toggle_visibility', [CategoryController::class, 'toggleVisibility'])->name('categories.toggle-visibility');
 
 Route::resource('brewers', BrewerController::class);
 
@@ -38,4 +40,4 @@ Route::get('/profile/{id}', [\App\Http\Controllers\UserController::class, 'show'
 Route::get('profile/{id}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
 Route::get('profile/{id}/verify', [\App\Http\Controllers\UserController::class, 'verify'])->name('profile.verify');
-Route::patch('/profile/{id}/verify', [\App\Http\Controllers\UserController::class, 'updateVerified'])->name('profile.updateVerified');
+Route::patch('/profile/{id}/verify', [\App\Http\Controllers\UserController::class, 'updateVerified'])->name('profile.update-verified');
