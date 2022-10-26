@@ -25,10 +25,10 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 Route::resource('beers', BeerController::class);
-Route::patch('/beers/{id}/toggle_visibility', [BeerController::class, 'toggleVisibility'])->name('beers.toggle-visibility');
+Route::patch('/beers/{id}/update_visibility', [BeerController::class, 'updateVisibility'])->name('beers.update-visibility');
 
 Route::resource('categories', CategoryController::class);
-Route::patch('/categories/{id}/toggle_visibility', [CategoryController::class, 'toggleVisibility'])->name('categories.toggle-visibility');
+Route::patch('/categories/{id}/update_visibility', [CategoryController::class, 'updateVisibility'])->name('categories.update-visibility');
 
 Route::resource('brewers', BrewerController::class);
 
