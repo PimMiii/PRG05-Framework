@@ -37,7 +37,7 @@ class BrewerController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Brewer $id)
     {
         $brewer = Brewer::find($id);
         return view('brewers.show', compact('brewer'));
@@ -48,7 +48,7 @@ class BrewerController extends Controller
     {
         $brewer = Brewer::find($id);
         if (\Auth::user()->is_admin){
-            $users = User::all();
+            $users = User::verified()->orderBy('name')->get();
             return view('brewers.edit', compact('brewer', 'users'));
         }
         return view('brewers.edit', compact('brewer'));

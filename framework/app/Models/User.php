@@ -49,4 +49,8 @@ class User extends Authenticatable
     public function reviews(){
         return $this->hasMany(Review::class);
     }
+
+    public function scopeVerified($query){
+        return $query->where('is_verified', 1);
+    }
 }

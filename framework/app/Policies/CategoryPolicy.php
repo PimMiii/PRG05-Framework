@@ -11,11 +11,11 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user)
-    {
-        if($user->is_admin){
-            return Response::allow();
+    public function before(User $user){
+        if(!$user->is_admin){
+            Response::deny();
         }
+        return Response::allow();
     }
 
 

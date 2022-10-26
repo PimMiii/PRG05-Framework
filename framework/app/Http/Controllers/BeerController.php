@@ -20,6 +20,9 @@ class BeerController extends Controller
 
     public function show($id) {
         $beer = Beer::find($id);
+        if(!$beer->is_visible){
+            abort(404);
+        }
         $userReview = null;
         foreach ($beer->reviews as $review){
             if (\Auth::id() === $review->user_id){

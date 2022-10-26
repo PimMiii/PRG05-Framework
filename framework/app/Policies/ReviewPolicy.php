@@ -15,9 +15,10 @@ class ReviewPolicy
     use HandlesAuthorization;
 
     public function before(User $user){
-        if($user->is_admin){
-            Response::allow();
+        if(!$user->is_admin){
+            Response::deny();
         }
+        return Response::allow();
     }
 
 

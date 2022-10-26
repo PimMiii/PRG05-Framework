@@ -17,7 +17,9 @@
                         <div class="card-body">
                             <p>{{$category->description}}</p>
                                 @foreach($category->beers as $beer)
+                                    @if($beer->is_visible)
                                 <p><a href="{{route('beers.show', $beer->id)}}">{{$beer->name}}</a></p>
+                                @endif
                                 @endforeach
                         </div>
                     </div>
