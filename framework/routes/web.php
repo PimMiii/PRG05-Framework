@@ -39,5 +39,4 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::get('/profile/{id}', [\App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
 Route::get('profile/{id}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{id}', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
-Route::get('profile/{id}/verify', [\App\Http\Controllers\UserController::class, 'verify'])->name('profile.verify');
 Route::patch('/profile/{id}/verify', [\App\Http\Controllers\UserController::class, 'updateVerified'])->name('profile.update-verified');

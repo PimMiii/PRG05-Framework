@@ -38,12 +38,14 @@ class UserPolicy
 
     public function verify(User $user, User $id)
     {
-        if($user->id === $id->id){
-            return Response::allow();
-        } else {
-            return Response::denyAsNotFound();
-        }
+       if(!$user->is_verified){
+           if(!$id->is_verified){
+               return Response::allow();
+           }
+       }
+       return Response::denyWithStatus(402);
     }
+
     /**
      * Create a new policy instance.
      *

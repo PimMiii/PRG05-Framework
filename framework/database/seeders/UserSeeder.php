@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
                 [
                     'name' => env('NONVERIFIED_USER_NAME'),
                     'email' => env('NONVERIFIED_USER_EMAIL'),
-                    'password' => bcrypt(env('NONVERIFIEDL_USER_PASSWORD')),
+                    'password' => bcrypt(env('NONVERIFIED_USER_PASSWORD')),
                     'is_admin' => 0,
                     'is_verified' => 0,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),

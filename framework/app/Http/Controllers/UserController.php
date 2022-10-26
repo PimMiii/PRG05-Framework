@@ -32,24 +32,31 @@ class UserController extends Controller
         if(\Auth::user()->cannot('profile-verify', $id)) {
             return abort(404);
         }
-
-        /*Validate request here and save*/
+        $user = $id;
+        $validated = $this->validate($request,
+            [
+                'name' => 'bail|required',
+                'email' => 'bail|required|',
+            ]);
+        $user->name = $validated['name'];
+        $user->email = $validated['email'];
+        $user->update();
+        return back();
     }
 
-    public function verify(User $id)
+    public function updateVerified(Request $request)
     {
-        if(\Auth::user()->can('profile-verify', $id)) {
-            $profile = $id;
-            return view('profile.verify', compact('profile'));
-        }
-        return abort(404);
-    }
-
-    public function updateVerified(Request $request, User $id)
-    {
-        if(\Auth::user()->cannot('profile-verify', $id)) {
+        $user = \Auth::user();
+        if(\Auth::user()->cannot('profile-verify', $user)) {
             return abort(404);
         }
+
+        if(!$user->is_verified){
+            $user->is_verified = 1;
+            $user->save();
+        }
+        return back();
+
 
         /*Validate request here and save*/
     }
