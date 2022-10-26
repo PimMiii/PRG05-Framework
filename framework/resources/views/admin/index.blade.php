@@ -23,14 +23,14 @@
                                                 @endif
                                                 href="{{route('beers.update-visibility', $beer->id)}}"
                                                 onclick="event.preventDefault();
-                                                     document.getElementById('{{$beer->id}}-visibility-form').submit();">
+                                                     document.getElementById('{{$beer->id}}-beer-visibility-form').submit();">
                                                 @if($beer->is_visible)
                                                     Zichtbaar
                                                 @else
                                                     Onzichtbaar
                                                 @endif
                                             </a>
-                                            <form id="{{$beer->id}}-visibility-form" action="{{route('beers.update-visibility', $beer->id)}}" method="POST"
+                                            <form id="{{$beer->id}}-beer-visibility-form" action="{{route('beers.update-visibility', $beer->id)}}" method="POST"
                                                   class="d-none">
                                                 @csrf
                                                 @method('PATCH')
@@ -66,14 +66,14 @@
                                                 @endif
                                                 href="{{route('categories.update-visibility', $category->id)}}"
                                                 onclick="event.preventDefault();
-                                                     document.getElementById('{{$category->id}}-visibility-form').submit();">
+                                                     document.getElementById('{{$category->id}}-category-visibility-form').submit();">
                                                 @if($category->is_visible)
                                                     Zichtbaar
                                                 @else
                                                     Onzichtbaar
                                                 @endif
                                             </a>
-                                            <form id="{{$category->id}}-visibility-form" action="{{route('categories.update-visibility', $category->id)}}" method="POST"
+                                            <form id="{{$category->id}}-category-visibility-form" action="{{route('categories.update-visibility', $category->id)}}" method="POST"
                                                   class="d-none">
                                                 @csrf
                                                 @method('PATCH')
