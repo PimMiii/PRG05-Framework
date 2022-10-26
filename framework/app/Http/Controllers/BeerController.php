@@ -13,8 +13,7 @@ class BeerController extends Controller
 
 
     public function index() {
-        $beers = Beer::all();
-        $beers = $beers->where('is_visible','=', 1);
+        $beers = Beer::visible()->orderBy('name')->get();
         return view('beers.index', compact('beers'));
     }
 

@@ -14,4 +14,9 @@ class Category extends Model
     public function beers(){
         return $this->belongsToMany(Beer::class);
     }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('is_visible', 1);
+    }
 }

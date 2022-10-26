@@ -33,4 +33,9 @@ class Beer extends Model
         }
         return $this->rating/10;
     }
+
+    public function scopeVisible($query)
+    {
+        return $query->where('is_visible', 1);
+    }
 }

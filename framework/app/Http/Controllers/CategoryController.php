@@ -15,8 +15,7 @@ class CategoryController extends Controller
 
     public function index()
     {
-        $categories = Category::all();
-        $categories = $categories->where('is_visible', '=', '1');
+        $categories = Category::visible()->orderBy('name')->get();
         return view('categories.index', compact('categories'));
     }
 
