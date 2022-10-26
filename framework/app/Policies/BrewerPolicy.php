@@ -14,9 +14,9 @@ class BrewerPolicy
     use HandlesAuthorization;
 
     public function before(User $user){
-        return $user->is_admin
-            ? Response::allow()
-            : Response::deny();
+        if($user->is_admin){
+            Response::allow();
+        }
     }
 
 

@@ -15,9 +15,9 @@ class ReviewPolicy
     use HandlesAuthorization;
 
     public function before(User $user){
-        return $user->is_admin
-            ? Response::allow()
-            : Response::deny();
+        if($user->is_admin){
+            Response::allow();
+        }
     }
 
 
@@ -60,12 +60,12 @@ class ReviewPolicy
 
     public function restore(User $user)
     {
-        return Response::denyWithStatus(404);
+       return Response::denyAsNotFound();
     }
 
 
     public function forceDelete(User $user, Review $review)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 }

@@ -11,10 +11,11 @@ class CategoryPolicy
 {
     use HandlesAuthorization;
 
-    public function before(User $user){
-        return $user->is_admin
-            ? Response::allow()
-            : Response::deny();
+    public function before(User $user)
+    {
+        if($user->is_admin){
+            return Response::allow();
+        }
     }
 
 
@@ -24,38 +25,40 @@ class CategoryPolicy
     }
 
 
-    public function view(?User $user)
+    public function view(?User $user, Category $category)
     {
-        return Response::allow();
+        return $category->is_visible
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
 
     public function create(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function update(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function delete(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function restore(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function forceDelete(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 }
