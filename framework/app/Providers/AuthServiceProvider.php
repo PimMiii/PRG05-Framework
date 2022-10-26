@@ -6,6 +6,7 @@ namespace App\Providers;
 use App\Models\Category;
 use App\Models\User;
 use App\Policies\CategoryPolicy;
+use App\Policies\UserPolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -17,6 +18,7 @@ class AuthServiceProvider extends ServiceProvider
      * @var array<class-string, class-string>
      */
     protected $policies = [
+
 
     ];
 
@@ -32,15 +34,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('admin-view', function (User $user) {
             return $user->is_admin;
         });
-        Gate::define('profile-view', function (User $user, User $profile) {
-           return $user->id === $profile->id;
-
-        });
-        Gate::define('profile-edit', function (User $user, User $profile) {
-            return $user->id === $profile->id;
-        });
-        Gate::define('profile-verify', function (User $user, User $profile) {
-            return $user->id === $profile->id;
-        });
+        Gate::define('profile-view', [UserPolicy::class, 'view']);
+        Gate::define('profile-edit', [UserPolicy::class, 'update']);
+        Gate::define('profile-verify', [UserPolicy::class, 'verify']);
     }
 }

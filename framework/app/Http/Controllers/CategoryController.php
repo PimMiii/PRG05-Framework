@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
-    public function __construct()
-    {
-        $this->authorizeResource(Category::class, Category::class);
-    }
 
 
     public function index()

@@ -15,6 +15,7 @@
                         @endif
                         <p>E-mail: {{$profile->email}}</p>
                         <p>Account aangemaakt op: {{$profile->created_at}}</p>
+                        <a href="{{route('profile.edit', $profile->id)}}" class="btn btn-warning">Gegevens Updaten</a>
                     </div>
                 </div>
             </div>

@@ -8,38 +8,50 @@ use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    public function show(int $id)
+    public function show(User $id)
     {
-        if (!Gate::allows('profile-view', [\Auth::user(), $id])) {
-            abort(404);
-        }
-            $profile = User::find($id);
+        if(\Auth::user()->can('profile-view', $id)) {
+            $profile = $id;
             return view('profile.show', compact('profile'));
-
+        }
+        return abort(404);
     }
 
-    public function edit(int $id)
-    { if (!Gate::allows('profile-edit', [\Auth::user(), $id])) {
-        abort(404);
-    }
-        $profile = User::find($id);
-        return view('profile.edit', compact('profile'));
-    }
-
-    public function update(Request $request)
+    public function edit(User $id)
     {
-        abort(404);
+        if(\Auth::user()->can('profile-view', $id)) {
+            $profile = $id;
+            return view('profile.edit', compact('profile'));
+        }
+        return abort(404);
     }
 
 
-    public function verify(int $id)
+    public function update(Request $request, User $id)
     {
-        abort(404);
+        if(\Auth::user()->cannot('profile-verify', $id)) {
+            return abort(404);
+        }
+
+        /*Validate request here and save*/
     }
 
-    public function updateVerified(Request $request)
+    public function verify(User $id)
     {
-        abort(404);
+        if(\Auth::user()->can('profile-verify', $id)) {
+            $profile = $id;
+            return view('profile.verify', compact('profile'));
+        }
+        return abort(404);
+    }
+
+    public function updateVerified(Request $request, User $id)
+    {
+        if(\Auth::user()->cannot('profile-verify', $id)) {
+            return abort(404);
+        }
+
+        /*Validate request here and save*/
     }
 
 
