@@ -13,7 +13,7 @@
                     </div>
                     <div class="card-body">
                         @if($beer->brewer)
-                            <h2><a href="/brewers/{{$beer->brewer_id}}">{{$beer->brewer->name}}</a></h2>
+                            <h2><a href="{{route('brewers.edit', $beer->brewer_id)}}">{{$beer->brewer->name}}</a></h2>
                         @endif
                         <h3>
                             <bold>Alcohol:</bold>{{number_format($beer->percentage/100, 2)}}%
