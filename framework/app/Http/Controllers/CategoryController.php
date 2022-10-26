@@ -79,4 +79,25 @@ class CategoryController extends Controller
         Category::destroy($validated['id']);
         return redirect('/categories');
     }
+
+    public function updateVisibility(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:beers',
+            ]);
+        $this->toggleVisibility($validated['id']);
+
+        return back();
+    }
+
+    private function toggleVisibility($id){
+        $category = Category::find($id);
+        if(!$category->is_visible){
+            $category->is_visible = 1;
+        } else {
+            $category->is_visible = 0;
+        }
+        return $category->save();
+    }
 }
