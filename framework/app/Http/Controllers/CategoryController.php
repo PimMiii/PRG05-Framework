@@ -16,6 +16,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $categories = $categories->where('is_visible', '=', '1');
         return view('categories.index', compact('categories'));
     }
 
@@ -84,7 +85,7 @@ class CategoryController extends Controller
     {
         $validated = $this->validate($request,
             [
-                'id' => 'bail|required|exists:beers',
+                'id' => 'bail|required|exists:categories',
             ]);
         $this->toggleVisibility($validated['id']);
 

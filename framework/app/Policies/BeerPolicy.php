@@ -25,8 +25,11 @@ class BeerPolicy
     }
 
 
-    public function view(?User $user)
+    public function view(Beer $beer)
     {
+        if(!$beer->is_visible){
+            return Response::denyAsNotFound();
+        }
         return Response::allow();
     }
 
@@ -65,5 +68,12 @@ class BeerPolicy
     public function forceDelete(User $user)
     {
         return Response::denyWithStatus(404);
+    }
+
+    public function toggleVisibility(User $user, Beer $beer)
+    {
+        return $beer->brewer->user_id === $user->id
+            ? Response::allow()
+            : Response::deny();
     }
 }

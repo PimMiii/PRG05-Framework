@@ -14,6 +14,7 @@ class BeerController extends Controller
 
     public function index() {
         $beers = Beer::all();
+        $beers = $beers->where('is_visible','=', 1);
         return view('beers.index', compact('beers'));
     }
 
@@ -109,5 +110,26 @@ class BeerController extends Controller
             ]);
         Beer::destroy($validated['id']);
         return redirect(route('beers.index'));
+    }
+
+    public function updateVisibility(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:beers',
+            ]);
+        $this->toggleVisibility($validated['id']);
+
+        return back();
+    }
+
+    private function toggleVisibility($id){
+        $beer = Beer::find($id);
+        if(!$beer->is_visible){
+            $beer->is_visible = 1;
+        } else {
+            $beer->is_visible = 0;
+        }
+        return $beer->save();
     }
 }
