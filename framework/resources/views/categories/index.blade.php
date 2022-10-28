@@ -5,7 +5,16 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @can('create', \App\Models\Category::class)
-                    <p><a href="{{route('categories.create')}}">Categorie toevoegen</a></p>
+                    <div class="alert alert-dark">
+                        <div class="row">
+                            <div class="col-9">
+                                <h3>{{Auth::user()->name}} kan Categorieën toevoegen</h3>
+                            </div>
+                            <div class="col">
+                                <a href="{{route('categories.create')}}" class="btn btn-success">Categorie toevoegen</a>
+                            </div>
+                        </div>
+                    </div>
                 @endcan
                 @foreach($categories as $category)
                     <div class="card">

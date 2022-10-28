@@ -5,7 +5,17 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 @can('create', \App\Models\Brewer::class)
-                    <p><a href="/brewers/create">Brouwerij toevoegen</a></p>
+                    <div class="alert alert-dark">
+                        <div class="row">
+                            <div class="col-9">
+                                <h3>{{Auth::user()->name}} kan Bieren toevoegen</h3>
+                            </div>
+                            <div class="col">
+                                <a href="{{route('brewers.create')}}" class="btn btn-success">Brouwerij toevoegen</a>
+                            </div>
+                        </div>
+                    </div>
+                    <p></p>
                 @endcan
 
                 @foreach($brewers as $brewer)

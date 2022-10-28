@@ -3,12 +3,12 @@
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
-            @include('partials.pagetracker')
+            @include('partials._pagetracker')
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h1>Profiel</h1></div>
                     <div class="card-body">
-                       <p>Naam: {{$profile->name}}</p>
+                        <p>Naam: {{$profile->name}}</p>
                         @if($profile->is_verified)
                             <p>Verified</p>
                         @endif

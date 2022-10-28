@@ -4,7 +4,7 @@
 
     <div class="container">
         <div class="row justify-content-center">
-            @include('partials.pagetracker')
+            @include('partials._pagetracker')
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header"><h1>{{$beer->name}}</h1>
@@ -31,20 +31,20 @@
                             @endforeach
                         </p>
                         {{--Reviews--}}
-                            @if($userReview !== null)
-                                <div class="card">
-                                    <div class="card-header">
-                                        <bold>{{$userReview->user->name}}</bold>
-                                        <bold>{{number_format($userReview->rating/10, 1)}} /10</bold>
-                                    </div>
-                                    <div class="card-body">
-                                        @can('update', $userReview)
-                                            <p><a href="{{route('reviews.edit', $userReview->id)}}">Aanpassen</a></p>
-                                        @endcan
-                                        <p>{{$userReview->comment}}</p>
-                                    </div>
+                        @if($userReview !== null)
+                            <div class="card">
+                                <div class="card-header">
+                                    <bold>{{$userReview->user->name}}</bold>
+                                    <bold>{{number_format($userReview->rating/10, 1)}} /10</bold>
                                 </div>
-                            @else
+                                <div class="card-body">
+                                    @can('update', $userReview)
+                                        <p><a href="{{route('reviews.edit', $userReview->id)}}">Aanpassen</a></p>
+                                    @endcan
+                                    <p>{{$userReview->comment}}</p>
+                                </div>
+                            </div>
+                        @else
                             <div class="card">
                                 <div class="card-header">
                                     <bold>Laat een review achter</bold>
@@ -106,21 +106,21 @@
                                 @else
                                     @php($reviews = $beer->reviews)
                                 @endif
-                            @foreach($reviews as $review)
-                                <div class="card">
-                                    <div class="card-header">
-                                        <bold>{{$review->user->name}}</bold>
-                                        <bold>{{number_format($review->rating/10, 1)}} /10</bold>
+                                @foreach($reviews as $review)
+                                    <div class="card">
+                                        <div class="card-header">
+                                            <bold>{{$review->user->name}}</bold>
+                                            <bold>{{number_format($review->rating/10, 1)}} /10</bold>
+                                        </div>
+                                        <div class="card-body">
+                                            @can('update', $review)
+                                                <p><a href="{{route('reviews.edit', $review->id)}}">Aanpassen</a></p>
+                                            @endcan
+                                            <p>{{$review->comment}}</p>
+                                        </div>
                                     </div>
-                                    <div class="card-body">
-                                        @can('update', $review)
-                                            <p><a href="{{route('reviews.edit', $review->id)}}">Aanpassen</a></p>
-                                        @endcan
-                                        <p>{{$review->comment}}</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
+                                @endforeach
+                            </div>
                     </div>
                 </div>
             </div>
