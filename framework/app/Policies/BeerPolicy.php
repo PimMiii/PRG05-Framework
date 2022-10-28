@@ -45,9 +45,12 @@ class BeerPolicy
 
     public function update(User $user, Beer $beer)
     {
-        return $beer->brewer->user_id === $user->id
-            ? Response::allow()
-            : Response::deny();
+        if (isset($user->brewer)) {
+            return $user->brewer->id === $beer->brewer_id
+                ? Response::allow()
+                : Response::deny();
+        }
+        return Response::denyAsNotFound();
     }
 
 

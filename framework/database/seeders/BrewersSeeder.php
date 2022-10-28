@@ -21,42 +21,49 @@ class BrewersSeeder extends Seeder
                 [
                     'name' => 'Heineken Nederland',
                     'user_id' => 2,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Brand Bierbrouwerij',
                     'user_id' => 1,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Hertog Jan Brouwerij',
                     'user_id' => 1,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Jopen Bier',
                     'user_id' => 1,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Anheuser-Busch InBev',
                     'user_id' => 1,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Bierbrouwerij De Koningshoeven',
                     'user_id' => 1,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
                 [
                     'name' => 'Brouwerij Liefmans',
                     'user_id' => 3,
+                    'is_visible' => 1,
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],

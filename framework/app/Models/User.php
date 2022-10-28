@@ -43,7 +43,7 @@ class User extends Authenticatable
     ];
 
     public function brewer(){
-        return $this->belongsTo(Brewer::class);
+        return $this->hasOne(Brewer::class);
     }
 
     public function reviews(){

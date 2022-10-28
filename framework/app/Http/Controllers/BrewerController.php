@@ -18,6 +18,10 @@ class BrewerController extends Controller
 
     public function create()
     {
+        if (\Auth::user()->is_admin){
+            $users = User::verified()->orderBy('name')->get();
+            return view('brewers.create', compact('users'));
+        }
         return view('brewers.create');
     }
 
@@ -29,9 +33,13 @@ class BrewerController extends Controller
         $validated = $this->validate($request,
             [
                 'name' => 'bail|required|unique:beers|max:255',
-                'description' => 'nullable'
+                'description' => 'nullable',
+                'user_id'=> 'nullable|numeric|min:1|exists:users,id|',
             ]);
-        $validated['user_id'] = \Auth::id();
+        if(!isset($validated['user_id'])){
+            $validated['user_id'] = \Auth::id();
+        }
+
         Brewer::create($validated);
         return redirect(route('brewers.index'));
     }

@@ -36,7 +36,9 @@ class BrewerPolicy
 
     public function create(User $user)
     {
-        return Response::denyAsNotFound();
+        return $user->brewer
+            ? Response::allow()
+            : Response::deny();
     }
 
 

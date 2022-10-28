@@ -42,7 +42,7 @@ class UserPolicy
                return Response::allow();
            }
        }
-       return Response::denyWithStatus(402);
+       return Response::denyAsNotFound();
     }
 
     /**

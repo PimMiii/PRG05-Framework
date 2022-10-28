@@ -19,7 +19,7 @@ class UserController extends Controller
 
     public function edit(User $id)
     {
-        if(\Auth::user()->can('profile-view', $id)) {
+        if(\Auth::user()->can('profile-edit', $id)) {
             $profile = $id;
             return view('profile.edit', compact('profile'));
         }
@@ -29,7 +29,7 @@ class UserController extends Controller
 
     public function update(Request $request, User $id)
     {
-        if(\Auth::user()->cannot('profile-verify', $id)) {
+        if(\Auth::user()->cannot('profile-edit', $id)) {
             return abort(404);
         }
         $user = $id;
@@ -41,7 +41,7 @@ class UserController extends Controller
         $user->name = $validated['name'];
         $user->email = $validated['email'];
         $user->update();
-        return back();
+        return redirect(route('profile.show', $user->id));
     }
 
     public function updateVerified(Request $request)
