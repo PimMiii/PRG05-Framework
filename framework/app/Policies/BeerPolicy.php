@@ -14,7 +14,7 @@ class BeerPolicy
 
     public function before(User $user){
         if($user->is_admin){
-            Response::allow();
+            return Response::allow();
         }
     }
 
