@@ -15,7 +15,6 @@ class UserPolicy
         if($user->is_admin){
             return Response::allow();
         }
-        return Response::denyAsNotFound();
     }
 
     public function view(User $user, User $id)
