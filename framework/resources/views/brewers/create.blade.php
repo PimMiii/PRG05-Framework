@@ -40,7 +40,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <input type="submit" value="Toevoegen">
+                            <input type="submit" value="Toevoegen" class="btn btn-light btn-outline-success">
 
                         </form>
 

@@ -59,7 +59,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <input type="submit" value="Opslaan">
+                            <input type="submit" value="Opslaan" class="btn btn-light btn-outline-warning">
                         </form>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                                    name="id"
                                    type="hidden"
                                    value="{{$brewer->id}}">
-                            <input type="submit" value="JA, ik weet het zeker!" class="bg-warning" >
+                            <input type="submit" value="JA, ik weet het zeker!" class="btn btn-light btn-outline-danger" >
                         </form>
                     </div>
                 </div>

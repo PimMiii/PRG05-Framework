@@ -48,7 +48,7 @@
                                     </ul>
                                 </div>
                             @endif--}}
-                            <input type="submit" value="Opslaan" class="btn btn-primary">
+                            <input type="submit" value="Opslaan" class="btn btn-light btn-outline-warning">
                         </form>
                     </div>
                 </div>

@@ -8,7 +8,7 @@
                         <h1>Review aanpassen</h1>
                     </div>
                     <div class="card-body">
-                        <form action="{{route('reviews.update', $review->id)}}" method="POST">
+                        <form action="{{route('reviews.update', $review->id)}}" method="POST" id="revieweditform">
                             @method('PUT')
                             @csrf
                             <label for="rating">Rating: </label>
@@ -19,17 +19,18 @@
                                    min="1.0"
                                    max="10.0"
                                    step="0.5"
-                                   class="@error("rating") is-invalid @enderror">
+                                   class="@error("rating") is-invalid @enderror form-control">
                             @error('rating')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
                             <label for="comment">Comment: </label>
-                            <input id="comment"
-                                   name="comment"
-                                   type="text"
-                                   value="{{old("comment", $review->comment)}}"
-                                   class="@error("comment") is-invalid @enderror">
+                            <textarea id="comment"
+                                      name="comment"
+                                      type="text"
+                                      form="revieweditform"
+                                      class="@error("comment") is-invalid @enderror form-control"
+                            >{{old("comment", $review->comment)}}</textarea>
                             @error("comment")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -43,7 +44,7 @@
                                     </ul>
                                 </div>
                             @endif
-                            <input type="submit" value="Review updaten" class="btn btn-primary">
+                            <input type="submit" value="Review updaten" class="btn btn-light btn-outline-warning">
                         </form>
                     </div>
                 </div>
@@ -65,7 +66,8 @@
                                        name="id"
                                        type="hidden"
                                        value="{{$review->id}}">
-                                <input type="submit" value="JA, ik weet het zeker!" class="btn btn-danger" >
+                                <input type="submit" value="JA, ik weet het zeker!"
+                                       class="btn btn-light btn-outline-danger">
                             </form>
                         </div>
                     </div>
