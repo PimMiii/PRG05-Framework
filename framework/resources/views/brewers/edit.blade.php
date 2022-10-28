@@ -3,13 +3,16 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <ul class="list-group list-group-flush">
+                    {{--Update--}}
+                    <li class="list-group-item">
+                <div class="card border border-warning">
                     <div class="card-header">
                         <h1>Brouwerij aanpassen</h1>
                     </div>
                     <div class="card-body">
                         {{--Form--}}
-                        <form action="{{route('brewers.update', $brewer->id)}}" method="POST">
+                        <form action="{{route('brewers.update', $brewer->id)}}" method="POST" id="brewerupdateform">
                             @method('PUT')
                             @csrf
                             <input id="id"
@@ -21,17 +24,19 @@
                                    name="name"
                                    type="text"
                                    value="{{old("name", $brewer->name)}}"
-                                   class="@error("name") is-invalid @enderror">
+                                   class="@error("name") is-invalid @enderror form-control">
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
                             <label for="description">Beschrijving: </label>
-                            <input id="description"
+                            <textarea id="description"
                                    name="description"
                                    type="text"
-                                   value="{{old("description", $brewer->description)}}"
-                                   class="@error("description") is-invalid @enderror">
+                                      form="brewerupdateform"
+                                   placeholder="optioneel"
+                                   class="@error("description") is-invalid @enderror form-control"
+                            >{{old("description", $brewer->description)}}</textarea>
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -39,7 +44,7 @@
                             {{--Only show dropdown to admin--}}
                             @if(Auth::user()->is_admin === 1)
                             <label for="user_id">Kies een nieuwe Brouwerij Eigenaar:</label>
-                            <select name="user_id" id="user_id">
+                            <select name="user_id" id="user_id" class="form-select">
                                 @foreach($users as $user)
                                     @if($user->id === $brewer->user_id)
                                         <option selected value="{{$user->id}}">{{$user->name}}</option>
@@ -63,13 +68,15 @@
                         </form>
                     </div>
                 </div>
+                    </li>
                 @can('delete', $brewer)
-                <div class="card">
+                        <li class="list-group-item">
+                <div class="card border border-danger">
                     <div class="card-header">
                         <h1>Brouwerij verwijderen</h1>
                     </div>
                     <div class="card-body">
-                        Wil je deze Brouwerij, {{$brewer->name}}, verwijderen? <br>
+                        <h5 class="card-text">Wil je deze <span class="badge text-bg-danger">{{$brewer->name}}</span> verwijderen? <br>
                         Deze brouwerij heeft {{$brewer->beers->count()}} bieren, deze zullen de brouwerij verliezen.<br>
                         <br>
                         <h5>Weet je zeker dat je de brouwerij wilt verwijderen?</h5>
@@ -84,7 +91,9 @@
                         </form>
                     </div>
                 </div>
+                </li>
                 @endcan
+                </ul>
             </div>
         </div>
 @endsection

@@ -4,20 +4,20 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card border border-success">
                     <div class="card-header">
-                        <h1>Nieuw Biertje toevoegen</h1>
+                        <h1 class="card-title">Nieuw Biertje toevoegen</h1>
                     </div>
                     <div class="card-body">
-
-                        <form action="{{route('beers.store')}}" method="POST">
+                        <form action="{{route('beers.store')}}" method="POST" id="beercreateform">
                             @csrf
                             <label for="name">Naam: </label>
                             <input id="name"
                                    name="name"
                                    type="text"
+                                   placeholder="Biernaam"
                                    value="{{old("name")}}"
-                                   class="@error("name") is-invalid @enderror">
+                                   class="@error("name") is-invalid @enderror form-control">
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
@@ -30,23 +30,25 @@
                                    max="100.0"
                                    step="0.1"
                                    value="{{doubleval(old("percentage", 500))/100}}"
-                                   class="@error("percentage") is-invalid @enderror">
+                                   class="@error("percentage") is-invalid @enderror form-control">
                             @error("percentage")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
                             <label for="description">Beschrijving: </label>
-                            <input id="description"
+                            <textarea id="description"
                                    name="description"
                                    type="text"
-                                   value="{{old("description")}}"
-                                   class="@error("description") is-invalid @enderror">
+                                      form="beercreateform"
+                                      placeholder="optioneel"
+                                   class="@error("description") is-invalid @enderror form-control"
+                            >{{old("description")}}</textarea>
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
                             <label for="brewer_id">Brouwerij: </label>
-                            <select name="brewer_id" id="brewer_id">
+                            <select name="brewer_id" id="brewer_id" class="form-select">
                                 @foreach($brewers as $brewer)
                                     <option value="{{$brewer->id}}">{{$brewer->name}}</option>
                                 @endforeach

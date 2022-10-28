@@ -54,7 +54,8 @@
                                     @endif
                                 @endforeach
                             </h5>
-                            <p class="card-text">{{$beer->description}}</p>
+                            <p class="card-text" style="transform: rotate(0deg)">{{$beer->description}}
+                                <a href="{{route('beers.show', $beer->id)}}" class="stretched-link"><span class="badge text-bg-info opacity-75">Meer Weergeven...</span></a></p>
                         </div>
                     </div>
                                 <br>

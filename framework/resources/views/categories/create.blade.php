@@ -4,30 +4,32 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card">
+                <div class="card border border-success">
                     <div class="card-header">
-                        <h1>Nieuwe Categorie toevoegen</h1>
+                        <h1 class="card-title">Nieuwe Categorie toevoegen</h1>
                     </div>
                     <div class="card-body">
-
-                        <form action="/categories" method="POST">
+                        <form action="/categories" method="POST" id="catcreateform">
                             @csrf
                             <label for="name">Naam: </label>
                             <input id="name"
                                    name="name"
                                    type="text"
+                                   placeholder="Categorie"
                                    value="{{old("name")}}"
-                                   class="@error("name") is-invalid @enderror">
+                                   class="@error("name") is-invalid @enderror form-control">
                             @error('title')
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror
                             <br>
                             <label for="description">Beschrijving: </label>
-                            <input id="description"
+                            <textarea id="description"
                                    name="description"
                                    type="text"
-                                   value="{{old("description")}}"
-                                   class="@error("description") is-invalid @enderror">
+                                      form="catcreateform"
+                                   placeholder="optioneel"
+                                   class="@error("description") is-invalid @enderror form-control"
+                            >{{old("description")}}</textarea>
                             @error("description")
                             <div class="alert alert-danger">{{ $message }}</div>
                             @enderror

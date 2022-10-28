@@ -8,7 +8,7 @@
                     <div class="alert alert-dark">
                         <div class="row">
                             <div class="col-9">
-                                <h3>{{Auth::user()->name}} kan Bieren toevoegen</h3>
+                                <h3>{{Auth::user()->name}} kan Brouwerijen toevoegen</h3>
                             </div>
                             <div class="col">
                                 <a href="{{route('brewers.create')}}" class="btn btn-success">Brouwerij toevoegen</a>
