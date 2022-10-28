@@ -1,12 +1,23 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="container">
         <div class="row justify-content-center">
+            @include('partials._search')
             <div class="col-md-8">
+
                 @can('create', \App\Models\Beer::class)
-                    <p><a href="/beers/create">Bier toevoegen</a></p>
+                    <div class="alert alert-dark">
+                    <div class="row">
+                        <div class="col-9">
+                            <h3>{{Auth::user()->name}} kan Bieren toevoegen</h3>
+                        </div>
+                        <div class="col">
+                        <a href="{{route('beers.create')}}" class="btn btn-success">Bier toevoegen</a>
+                        </div>
+                    </div>
+                    </div>
                 @endcan
+
                 @foreach($beers as $beer)
                     <div class="card">
                         <div class="card-header"><h1><a href="/beers/{{$beer->id}}">{{$beer->name}}</a></h1>

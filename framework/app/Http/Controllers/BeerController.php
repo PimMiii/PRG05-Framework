@@ -13,8 +13,14 @@ class BeerController extends Controller
 
 
     public function index() {
-        $beers = Beer::visible()->orderBy('name')->get();
-        return view('beers.index', compact('beers'));
+        $categories = Category::visible()->get();
+        $beers = Beer::latest()
+            ->filter(\request(['search', 'category']))
+            ->visible()
+            ->orderByDesc('updated_at')
+            ->get();
+
+        return view('beers.index', compact('beers', 'categories'));
     }
 
 

@@ -34,6 +34,20 @@ class Beer extends Model
         return $this->rating/10;
     }
 
+    public function scopeFilter($query, array $filters) {
+        if ($filters['search'] ?? false) {
+            $query
+                ->where('name', 'like', '%'.$filters['search'].'%')
+                ->orWhere('description', 'like', '%'.$filters['search'].'%')
+                ->orWhereRelation('reviews', 'comment', 'like', '%'.$filters['search'].'%');
+        }
+
+        if ($filters['category']?? false) {
+            $query->whereRelation('categories', 'id', 'like', $filters['category']);
+
+        }
+    }
+
     public function scopeVisible($query)
     {
         return $query->where('is_visible', 1);
