@@ -43,7 +43,8 @@ class Beer extends Model
         }
 
         if ($filters['category']?? false) {
-            $query->whereRelation('categories', 'id', 'like', $filters['category']);
+            foreach ($filters['category'] as $filterCategory)
+            $query->orWhereRelation('categories', 'id', 'like', $filterCategory);
 
         }
     }

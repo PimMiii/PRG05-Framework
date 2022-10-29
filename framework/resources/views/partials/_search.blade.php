@@ -11,7 +11,7 @@
                     >
                 </div>
                 <div class="col">
-                    <select name="category" class="form-select" optional>
+                    <select name="category[]" class="form-select" multiple="multiple">
                         <option value="" selected>--Categorie Kiezen--</option>
                         @foreach($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
