@@ -34,7 +34,8 @@ class Beer extends Model
         return $this->rating/10;
     }
 
-    public function scopeFilter($query, array $filters) {
+    public function scopeFilter($query, array $filters)
+    {
         if ($filters['search'] ?? false) {
             $query
                 ->where('name', 'like', '%'.$filters['search'].'%')
@@ -42,12 +43,18 @@ class Beer extends Model
                 ->orWhereRelation('reviews', 'comment', 'like', '%'.$filters['search'].'%');
         }
 
-        if ($filters['category']?? false) {
-            foreach ($filters['category'] as $filterCategory)
-            $query->orWhereRelation('categories', 'id', 'like', $filterCategory);
-
+        if ($filters['searchCategory']?? false) {
+            $i=0;
+            foreach ($filters['searchCategory'] as $filterCategory)
+                if($i===0) {
+                    $query->whereRelation('categories', 'id', 'like', $filterCategory);
+                    ;
+                } else {
+                    $query->orWhereRelation('categories', 'id', 'like', $filterCategory);
+                }
         }
     }
+
 
     public function scopeVisible($query)
     {

@@ -28,7 +28,7 @@ class HomeController extends Controller
     public function index()
     {
         $beers = Beer::latest()
-            ->filter(\request(['search', 'category']))
+            ->filter(\request(['search', 'searchCategory']))
             ->visible()
             ->orderByDesc('updated_at')
             ->get();

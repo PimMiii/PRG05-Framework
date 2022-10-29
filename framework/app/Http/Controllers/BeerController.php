@@ -15,7 +15,7 @@ class BeerController extends Controller
     public function index() {
         $categories = Category::visible()->get();
         $beers = Beer::latest()
-            ->filter(\request(['search', 'category']))
+            ->filter(\request(['search', 'searchCategory']))
             ->visible()
             ->orderByDesc('updated_at')
             ->get();
