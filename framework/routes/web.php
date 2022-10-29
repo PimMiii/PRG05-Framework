@@ -31,6 +31,7 @@ Route::resource('categories', CategoryController::class);
 Route::patch('/categories/{id}/update_visibility', [CategoryController::class, 'updateVisibility'])->name('categories.update-visibility');
 
 Route::resource('brewers', BrewerController::class);
+Route::patch('/brewers/{id}/update_visibility', [BrewerController::class, 'updateVisibility'])->name('brewers.update-visibility');
 
 Route::resource('reviews', ReviewController::class);
 

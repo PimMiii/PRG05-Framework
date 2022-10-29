@@ -36,8 +36,7 @@ class BeerPolicy
 
     public function create(User $user)
     {
-        $brewer = Brewer::where('user_id', '=', $user->id)->get();
-        return $brewer->count() > 0
+        return isset($user->brewer)
             ? Response::allow()
             : Response::deny();
     }

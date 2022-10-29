@@ -45,9 +45,8 @@ class BrewerController extends Controller
     }
 
 
-    public function show(Brewer $id)
+    public function show(Brewer $brewer)
     {
-        $brewer = Brewer::find($id);
         return view('brewers.show', compact('brewer'));
     }
 
@@ -94,4 +93,24 @@ class BrewerController extends Controller
     }
 
 
+    public function updateVisibility(Request $request)
+    {
+        $validated = $this->validate($request,
+            [
+                'id' => 'bail|required|exists:brewers',
+            ]);
+        $this->toggleVisibility($validated['id']);
+
+        return back();
+    }
+
+    private function toggleVisibility($id){
+        $brewer = Brewer::find($id);
+        if(!$brewer->is_visible){
+            $brewer->is_visible = 1;
+        } else {
+            $brewer->is_visible = 0;
+        }
+        return $brewer->save();
+    }
 }
