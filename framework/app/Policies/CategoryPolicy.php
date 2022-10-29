@@ -34,7 +34,9 @@ class CategoryPolicy
 
     public function create(User $user)
     {
-        return Response::denyAsNotFound();
+        return isset($user->brewer)
+            ? Response::allow()
+            : Response::denyAsNotFound();
     }
 
 

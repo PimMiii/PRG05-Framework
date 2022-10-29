@@ -128,7 +128,7 @@ class BeerController extends Controller
             ]);
         $this->toggleVisibility($validated['id']);
 
-        return back();
+        return redirect()->back();
     }
 
     private function toggleVisibility($id){
