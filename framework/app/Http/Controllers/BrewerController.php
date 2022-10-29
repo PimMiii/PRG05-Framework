@@ -11,7 +11,7 @@ class BrewerController extends Controller
 
     public function index()
     {
-        $brewers = Brewer::all();
+        $brewers = Brewer::latest()->visible()->get();
         return view('brewers.index', compact('brewers'));
     }
 

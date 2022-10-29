@@ -15,10 +15,10 @@ class AdminController extends Controller
         if (! Gate::allows('admin-view', \Auth::user())) {
             abort(404);
         } else {
-            $beers = Beer::all();
-            $brewers = Brewer::all();
-            $categories = Category::all();
-            $users = User::all();
+            $beers = Beer::orderBy('name')->get();
+            $brewers = Brewer::orderBy('name')->get();
+            $categories = Category::orderBy('name')->get();
+            $users = User::orderBy('name')->get();
             return view('admin.index', compact('beers', 'brewers', 'categories', 'users'));
         }
     }
