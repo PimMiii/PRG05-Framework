@@ -25,16 +25,18 @@
                                         @endcan
                                     </div>
                                     <div class="row">
-                                        <div class="col-1"><h2>🍺</h2></div>
-                                        <div class="col-8">
-                                            <h2 class="card-text">{{number_format($beer->percentage/100, 2)}}%</h2>
+                                        <div class="col-9">
+                                            <h2 class="card-text">🍺{{number_format($beer->percentage/100, 2)}}%</h2>
                                         </div>
                                         <div class="col-3">
                                             <h2 class="card-title">💕{{number_format($beer->calculateRating(), 1)}}
                                                 /10</h2>
                                         </div>
                                     </div>
-                                    <h5 class="card-text">
+
+                                            <h5 class="card-text">Brouwer: <a href="{{route('brewers.show', $beer->brewer->id)}}">{{$beer->brewer->name}}</a></h5>
+
+                                    <h5 class="card-text">Categorieën:
                                         @foreach($beer->categories as $category)
                                             <a href="{{route('categories.show', $category->id)}}"><span
                                                     class="badge text-bg-warning">{{$category->name}}</span></a>
@@ -43,6 +45,8 @@
                                             @endif
                                         @endforeach
                                     </h5>
+
+
                                     <p class="card-text">{{$beer->description}}</p>
                                 </div>
                                 {{--Reviews--}}
@@ -69,7 +73,6 @@
                                                     </div>
                                                     @if($userReview->comment !== null)
                                                         <div class="card-body">
-
                                                             <p>{{$userReview->comment}}</p>
                                                         </div>
                                                     @endif

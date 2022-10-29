@@ -16,23 +16,73 @@
                         </div>
                     </div>
                 @endcan
-                @foreach($categories as $category)
-                    <div class="card">
-                        <div class="card-header"><h1><a href="{{route('categories.show', $category->id)}}">{{$category->name}}</a></h1>
+
+                <ul class="list-group list-group-flush">
+                    @foreach($categories as $category)
+                        <li class="list-group-item">
                             @can('update', $category)
-                                <a href="{{route('categories.edit', $category->id)}}">Aanpassen</a>
-                            @endcan
-                        </div>
-                        <div class="card-body">
-                            <p>{{$category->description}}</p>
-                                @foreach($category->beers as $beer)
-                                    @if($beer->is_visible)
-                                <p><a href="{{route('beers.show', $beer->id)}}">{{$beer->name}}</a></p>
-                                @endif
-                                @endforeach
-                        </div>
-                    </div>
-                @endforeach
+                                <div class="card border border-warning">
+                                    @endcan
+                                    @cannot('update', $category)
+                                        <div class="card border border-info">
+                                            @endcan
+                                            <div class="card-header">
+                                                <div class="row">
+                                                    <div class="col-9">
+                                                        <h1 class="card-title"><a
+                                                                href="{{route('categories.show', $category->id)}}">{{$category->name}}</a>
+                                                        </h1>
+                                                    </div>
+                                                    @can('update', $category)
+                                                        <div class="col">
+                                                            <a class="btn btn-outline-warning"
+                                                               href="{{route('categories.edit', $category->id)}}">Aanpassen</a>
+                                                        </div>
+                                                    @endcan
+                                                </div>
+                                            </div>
+                                            <div class="card-body">
+                                                <h5 class="card-text">{{$category->description}}</h5>
+                                                <ul class="list-group list-group-flush">
+                                                    @foreach($category->beers as $beer)
+                                                        @if($beer->is_visible)
+                                                            <li class="list-group-item">
+                                                                <div class="row">
+                                                                    <div class="col-9">
+                                                                        <h5 class="card-text"><a
+                                                                                href="{{route('beers.show', $beer->id)}}"
+                                                                                class="stretched-link">{{$beer->name}}</a>
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="col">
+                                                                        @if($beer->calculateRating() > 7)
+                                                                            <h5 class="card-text">💕<span
+                                                                                    class="badge text-bg-success">{{number_format($beer->calculateRating(), 1)}}/10</span>
+                                                                            </h5>
+                                                                        @elseif($beer->calculateRating() > 4)
+                                                                            <h5 class="card-text">💕<span
+                                                                                    class="badge text-bg-warning">{{number_format($beer->calculateRating(), 1)}}/10</span>
+                                                                            </h5>
+                                                                        @elseif($beer->calculateRating() === 0)
+                                                                            <h5 class="card-text">💕<span
+                                                                                    class="badge text-bg-info">{{number_format($beer->calculateRating(), 1)}}/10</span>
+                                                                            </h5>
+                                                                        @else
+                                                                            <h5 class="card-text">💕<span
+                                                                                    class="badge text-bg-danger">{{number_format($beer->calculateRating(), 1)}}/10</span>
+                                                                            </h5>
+                                                                        @endif
+                                                                    </div>
+                                                                </div>
+                                                            </li>
+                                                        @endif
+                                                    @endforeach
+                                                </ul>
+                                            </div>
+                                        </div>
+                        </li>
+                    @endforeach
+                </ul>
             </div>
         </div>
     </div>
