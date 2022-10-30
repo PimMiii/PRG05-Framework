@@ -37,7 +37,7 @@ Route::resource('reviews', ReviewController::class);
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 
-Route::get('/profile/{profile}', [\App\Http\Controllers\UserController::class, 'show'])->name('profile.show');
+Route::get('/profile/{profile}', [\App\Http\Controllers\UserController::class, 'view'])->name('profile.show');
 Route::get('profile/{profile}/edit', [\App\Http\Controllers\UserController::class, 'edit'])->name('profile.edit');
 Route::patch('/profile/{profile}', [\App\Http\Controllers\UserController::class, 'update'])->name('profile.update');
 Route::patch('/profile/{profile}/verify', [\App\Http\Controllers\UserController::class, 'updateVerified'])->name('profile.update-verified');

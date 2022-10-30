@@ -3,7 +3,6 @@
 namespace App\Policies;
 
 use App\Models\Beer;
-use App\Models\Brewer;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
@@ -25,12 +24,15 @@ class BeerPolicy
     }
 
 
-    public function view(Beer $beer)
+    public function view(?User $user, Beer $beer)
     {
-        if(!$beer->is_visible){
+        if($beer->brewer->user_id === $user->id){
+            return Response::allow();
+        } elseif(!$beer->is_visible) {
             return Response::denyAsNotFound();
+        } else {
+            return Response::allow();
         }
-        return Response::allow();
     }
 
 
@@ -44,12 +46,10 @@ class BeerPolicy
 
     public function update(User $user, Beer $beer)
     {
-        if (isset($user->brewer)) {
-            return $user->brewer->id === $beer->brewer_id
+        return $beer->brewer->user_id === $user->id
                 ? Response::allow()
                 : Response::deny();
-        }
-        return Response::denyAsNotFound();
+
     }
 
 

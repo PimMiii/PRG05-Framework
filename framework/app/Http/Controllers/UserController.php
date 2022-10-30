@@ -8,31 +8,29 @@ use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
 {
-    public function show(User $id)
+
+    public function view(User $profile)
     {
-        if(\Auth::user()->can('profile-view', $id)) {
-            $profile = $id;
+        if(\Auth::user()->can('profile-view', $profile)) {
             return view('profile.show', compact('profile'));
         }
         return abort(404);
     }
 
-    public function edit(User $id)
+    public function edit(User $profile)
     {
-        if(\Auth::user()->can('profile-edit', $id)) {
-            $profile = $id;
+        if(\Auth::user()->can('profile-edit', $profile)) {
             return view('profile.edit', compact('profile'));
         }
         return abort(404);
     }
 
 
-    public function update(Request $request, User $id)
+    public function update(Request $request, User $user)
     {
-        if(\Auth::user()->cannot('profile-edit', $id)) {
+        if(\Auth::user()->cannot('profile-edit', $user)) {
             return abort(404);
         }
-        $user = $id;
         $validated = $this->validate($request,
             [
                 'name' => 'bail|required',
@@ -44,9 +42,8 @@ class UserController extends Controller
         return redirect(route('profile.show', $user->id));
     }
 
-    public function updateVerified(Request $request)
+    public function updateVerified(Request $request, User $user)
     {
-        $user = \Auth::user();
         if(\Auth::user()->cannot('profile-verify', $user)) {
             return abort(404);
         }
@@ -56,9 +53,6 @@ class UserController extends Controller
             $user->save();
         }
         return back();
-
-
-        /*Validate request here and save*/
     }
 
 

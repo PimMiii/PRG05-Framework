@@ -14,11 +14,9 @@ class BrewerPolicy
     use HandlesAuthorization;
 
     public function before(User $user){
-        if($user->is_admin){
+        if($user->is_admin) {
             return Response::allow();
         }
-
-
     }
 
 
@@ -28,9 +26,13 @@ class BrewerPolicy
     }
 
 
-    public function view(?User $user)
+    public function view(?User $user, Brewer $brewer)
     {
-        return Response::allow();
+        if(!$brewer->is_visible && $brewer->user !== $user){
+            return Response::denyAsNotFound();
+        } else {
+            return Response::allow();
+        }
     }
 
 
@@ -44,7 +46,7 @@ class BrewerPolicy
     {
        return $brewer->user_id === $user->id
            ? Response::allow()
-           : Response::deny();
+           : Response::denyAsNotFound();
     }
 
 
@@ -52,7 +54,7 @@ class BrewerPolicy
     {
         return $brewer->user_id === $user->id
             ? Response::allow()
-            : Response::deny();
+            : Response::denyAsNotFound();
     }
 
 

@@ -10,7 +10,10 @@ use Illuminate\Support\Carbon;
 
 class BeerController extends Controller
 {
-
+    public function __construct()
+    {
+        $this->authorizeResource(Beer::class, 'beer');
+    }
 
     public function index() {
         $categories = Category::visible()->get();
@@ -24,11 +27,7 @@ class BeerController extends Controller
     }
 
 
-    public function show($id) {
-        $beer = Beer::find($id);
-        if(!$beer->is_visible){
-            abort(404);
-        }
+    public function show(Beer $beer) {
         $userReview = null;
         foreach ($beer->reviews as $review){
             if (\Auth::id() === $review->user_id){
@@ -73,9 +72,8 @@ class BeerController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        $beer = Beer::find($id);
         if(\Auth::user()->is_admin===1){
             $brewers = Brewer::all();
         }else {
@@ -87,7 +85,7 @@ class BeerController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, Beer $beer)
     {
         $validated = $this->validate($request,
             [
@@ -99,7 +97,6 @@ class BeerController extends Controller
                 'category_id' => 'bail|required',
                 'category_id.*' => 'bail|numeric|min:1|exists:categories,id'
             ]);
-        $beer = Beer::find($validated['id']);
         $beer->name = $validated['name'];
         $beer->percentage = $validated['percentage']*100;
         $beer->description = $validated['description'];
@@ -110,29 +107,28 @@ class BeerController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Beer $beer)
     {
-        $validated = $this->validate($request,
+        $this->validate($request,
             [
                 'id' => 'bail|required|exists:beers'
             ]);
-        Beer::destroy($validated['id']);
+        $beer->delete();
         return redirect(route('beers.index'));
     }
 
-    public function updateVisibility(Request $request)
+    public function updateVisibility(Request $request, Beer $beer)
     {
-        $validated = $this->validate($request,
+        $this->validate($request,
             [
                 'id' => 'bail|required|exists:beers',
             ]);
-        $this->toggleVisibility($validated['id']);
+        $this->toggleVisibility($beer);
 
         return redirect()->back();
     }
 
-    private function toggleVisibility($id){
-        $beer = Beer::find($id);
+    private function toggleVisibility(Beer $beer){
         if(!$beer->is_visible){
             $beer->is_visible = 1;
         } else {

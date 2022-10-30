@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class BrewerController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Brewer::class, 'brewer');
+    }
 
     public function index()
     {
@@ -55,9 +59,8 @@ class BrewerController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Brewer $brewer)
     {
-        $brewer = Brewer::find($id);
         if (\Auth::user()->is_admin){
             $users = User::verified()->orderBy('name')->get();
             return view('brewers.edit', compact('brewer', 'users'));
@@ -66,7 +69,7 @@ class BrewerController extends Controller
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, Brewer $brewer)
     {
         $validated = $this->validate($request,
             [
@@ -75,7 +78,6 @@ class BrewerController extends Controller
                 'description' => 'nullable',
                 'user_id'=> 'nullable|numeric|min:1|exists:users,id|'
             ]);
-        $brewer = Brewer::find($validated['id']);
         $brewer->name = $validated['name'];
         $brewer->description = $validated['description'];
         if(array_key_exists('user_id', $validated)){
@@ -86,30 +88,29 @@ class BrewerController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Brewer $brewer)
     {
-        $validated = $this->validate($request,
+       $this->validate($request,
             [
                 'id' => 'bail|required|exists:brewers'
             ]);
-        Brewer::destroy($validated['id']);
+        $brewer->delete();
         return redirect(route('brewers.index'));
     }
 
 
-    public function updateVisibility(Request $request)
+    public function updateVisibility(Request $request, Brewer $brewer)
     {
         $validated = $this->validate($request,
             [
                 'id' => 'bail|required|exists:brewers',
             ]);
-        $this->toggleVisibility($validated['id']);
+        $this->toggleVisibility($brewer);
 
         return back();
     }
 
-    private function toggleVisibility($id){
-        $brewer = Brewer::find($id);
+    private function toggleVisibility(Brewer $brewer){
         if(!$brewer->is_visible){
             $brewer->is_visible = 1;
         } else {

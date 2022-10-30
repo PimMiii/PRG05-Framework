@@ -8,6 +8,11 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorizeResource(Review::class, 'review');
+    }
+
     public function index()
     {
         return redirect(route('beers.index'));
@@ -42,28 +47,25 @@ class ReviewController extends Controller
 
 
 
-    public function show(int $id)
+    public function show(Review $review)
     {
-        $review = Review::find($id);
         return redirect(route('beers.show', $review->beer->id));
     }
 
 
-    public function edit(int $id)
+    public function edit(Review $review)
     {
-        $review = Review::find($id);
         return view('reviews.edit', compact('review'));
     }
 
 
-    public function update(Request $request, int $id)
+    public function update(Request $request, Review $review)
     {
         $validated = $this->validate($request,
             [
                 'rating' => 'bail|required|numeric|max:10|min:1',
                 'comment' => 'nullable',
             ]);
-        $review = Review::find($id);
         $review->rating = $validated['rating']*10;
         $review->comment = $validated['comment'];
         $review->save();
@@ -71,14 +73,13 @@ class ReviewController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Review $review)
     {
 
-        $validated = $this->validate($request,
+        $this->validate($request,
             [
                 'id' => 'bail|required|exists:reviews'
             ]);
-        $review = Review::find($validated['id']);
         $beer_id = $review->beer_id;
         $review->delete();
         return redirect(route('beers.show', $beer_id));

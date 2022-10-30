@@ -17,41 +17,33 @@ class UserPolicy
         }
     }
 
-    public function view(User $user, User $id)
+    public function view(User $user, User $profile)
     {
-        if($user->id === $id->id){
+        if($user->id === $profile->id){
             return Response::allow();
         } else {
             return Response::denyAsNotFound();
         }
     }
 
-    public function update(User $user, User $id)
+    public function update(User $user, User $profile)
     {
-        if($user->id === $id->id){
+        if($user->id === $profile->id){
             return Response::allow();
         } else {
             return Response::denyAsNotFound();
         }
     }
 
-    public function verify(User $user, User $id)
+    public function verify(User $user, User $profile)
     {
        if(!$user->is_verified){
-           if(!$id->is_verified){
+           if(!$profile->is_verified){
                return Response::allow();
            }
        }
        return Response::denyAsNotFound();
     }
 
-    /**
-     * Create a new policy instance.
-     *
-     * @return void
-     */
-    public function __construct()
-    {
-        //
-    }
+
 }

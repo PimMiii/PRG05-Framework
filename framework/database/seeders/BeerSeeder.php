@@ -22,8 +22,10 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 1,
                     'name' => 'Heineken Pilsener',
                     'percentage' => 500,
-                    'description' => 'Heineken Pilsener is beroemd over de hele wereld. ' .
-                        'Bekend vanwege zijn kenmerkende smaak, die vooral te danken is aan de Heineken A-gist.',
+                    'is_visible' => 1,
+                    'description' =>
+                        "Heineken Pilsener is beroemd over de hele wereld.".
+                        " Bekend vanwege zijn kenmerkende smaak, die vooral te danken is aan de Heineken A-gist.",
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
                 ],
@@ -31,6 +33,7 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 2,
                     'name' => 'Brand Pilsener',
                     'percentage' => 500,
+                    'is_visible' => 1,
                     'description' =>
                         'Brand Pilsener wordt gebrouwen met meer hop dan veel andere pilseners. ' .
                         'Dat geeft deze Pilsener zijn eigen, krachtige smaak. ' .
@@ -45,7 +48,9 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 3,
                     'name' => 'Hertog Jan Pilsener',
                     'percentage' => 510,
-                    'description' => 'Het visitekaartje van Hertog Jan is zonder meer de pilsener. ' .
+                    'is_visible' => 1,
+                    'description' =>
+                        'Het visitekaartje van Hertog Jan is zonder meer de pilsener. ' .
                         'De ingrediënten voor dit bier zijn met de grootste zorg geselecteerd. ' .
                         'Alleen de rijkste mout, de mooiste hop en kristalhelder natuurzuiver water uit de Eiffel zijn goed genoeg. ' .
                         'Deze ingrediënten en de kunde van de brouwers zorgen voor goudgele kleur en de mooie volle schuimkraag. ' .
@@ -57,7 +62,9 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 4,
                     'name' => 'Jopen Nederwit',
                     'percentage' => 550,
-                    'description' => 'Jopen Nederwit is een mix van Witbier en New England IPA. ' .
+                    'is_visible' => 1,
+                    'description' =>
+                        'Jopen Nederwit is een mix van Witbier en New England IPA. ' .
                         'Een fris en fruitig bier met een alcoholpercentage van 5,5%.',
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
                     'updated_at' => Carbon::now()->format("Y-m-d H:i:s")
@@ -66,7 +73,9 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 5,
                     'name' => 'Hoegaarden Wit',
                     'percentage' => 490,
-                    'description' => 'Hoegaarden Wit, of Hoegaarden Blanche is een witbier, zoals witbier bedoeld is. ' .
+                    'is_visible' => 1,
+                    'description' =>
+                        'Hoegaarden Wit, of Hoegaarden Blanche is een witbier, zoals witbier bedoeld is. ' .
                         'Dit bier werd groot gemaakt door biericoon Pierre Célis. ' .
                         'Zonder zijn inspanningen hadden we mogelijk de hele stijl witbier niet meer gekend. ' .
                         'Dat zou zonde zijn, want deze Hoegaarden Wit is een regelrechte klassieker. ' .
@@ -78,7 +87,9 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 6,
                     'name' => 'La Trappe Witte Trappist',
                     'percentage' => 550,
-                    'description' => 'La Trappe Witte Trappist is het enige witbier dat het logo Authentic Trappist Product mag voeren. ' .
+                    'is_visible' => 1,
+                    'description' =>
+                        'La Trappe Witte Trappist is het enige witbier dat het logo Authentic Trappist Product mag voeren. ' .
                         'Het is een fris, lichtzure dorstlesser, waar je makkelijk een tweede flesje of glas van bestelt. ' .
                         'Het bier heeft een lichtbittere, droge afdronk.',
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),
@@ -88,7 +99,9 @@ class BeerSeeder extends Seeder
                     'brewer_id' => 7,
                     'name' => 'Liefmans Fruitesse',
                     'percentage' => 380,
-                    'description' => 'Liefmans Fruitesse is een heel fruitig bier. De smaak is licht zoet met fruitige accenten van aardbei,'.
+                    'is_visible' => 1,
+                    'description' =>
+                        'Liefmans Fruitesse is een heel fruitig bier. De smaak is licht zoet met fruitige accenten van aardbei,'.
                         'framboos, kriek, bosbes en vlierbes. Liefmans Fruitesse drink je bijvoorbeeld ook met veel ijs en smaakt goed bij chocoladetaart'.
                         'met aardbeien en frambozen.',
                     'created_at' => Carbon::now()->format("Y-m-d H:i:s"),

@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->authorizeResource(Category::class, 'category');
+    }
 
 
     public function index()
@@ -38,21 +42,19 @@ class CategoryController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Category $category)
     {
-        $category = Category::find($id);
         return view('categories.show', compact('category'));
     }
 
 
-    public function edit($id)
+    public function edit(Category $category)
     {
-        $category = Category::find($id);
         return view('categories.edit', compact('category'));
     }
 
 
-    public function update(Request $request)
+    public function update(Request $request, Category $category)
     {
         $validated = $this->validate($request,
             [
@@ -60,7 +62,6 @@ class CategoryController extends Controller
                 'name' => 'bail|required|exists:categories|max:255',
                 'description' => 'nullable'
             ]);
-        $category = Category::find($validated['id']);
         $category->name = $validated['name'];
         $category->description = $validated['description'];
         $category->save();
@@ -68,7 +69,7 @@ class CategoryController extends Controller
     }
 
 
-    public function destroy(Request $request)
+    public function destroy(Request $request, Category $category)
     {
         $validated = $this->validate($request,
         [
@@ -78,19 +79,18 @@ class CategoryController extends Controller
         return redirect('/categories');
     }
 
-    public function updateVisibility(Request $request)
+    public function updateVisibility(Request $request, Category $category)
     {
-        $validated = $this->validate($request,
+       $this->validate($request,
             [
                 'id' => 'bail|required|exists:categories',
             ]);
-        $this->toggleVisibility($validated['id']);
+        $this->toggleVisibility($category);
 
         return back();
     }
 
-    private function toggleVisibility($id){
-        $category = Category::find($id);
+    private function toggleVisibility(Category $category){
         if(!$category->is_visible){
             $category->is_visible = 1;
         } else {

@@ -16,7 +16,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        /*$this->middleware('auth');*/
 
     }
 
@@ -31,7 +31,7 @@ class HomeController extends Controller
             ->filter(\request(['search', 'searchCategory']))
             ->visible()
             ->orderByDesc('updated_at')
-            ->get();
+            ->paginate(5);
         $brewers = Brewer::orderBy('name')->visible()->get();
         $categories = Category::orderBy('name')->visible()->get();
         return view('home.index', compact('beers','brewers', 'categories'));
