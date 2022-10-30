@@ -1,15 +1,15 @@
 <div class="alert alert-info">
     <div class="align-items-end">
         <form method="GET" action="#" name="searchform">
-            <div class="row">
-                <div class="col-7">
+            <div class=row">
+                <div  class="btn-toolbar">
+                    <div class="col-md-5 mx-2">
                     <input type="text"
                            name="search"
                            placeholder="Zoeken..."
                            class="form-control"
                            value="{{request('search')}}">
                 </div>
-                <div class="col-4">
                     <div class="btn-group btn-group">
                         @if(request(['searchCategory']))
                             @php
@@ -41,9 +41,9 @@
                             @endforeach
                         @endif
                     </div>
-                </div>
-                <div class="col-1 gx-1">
+                <div class="mx-2">
                     <input type="submit" class="btn btn-success" value="🔍">
+                </div>
                 </div>
             </div>
         </form>
