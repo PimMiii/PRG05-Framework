@@ -28,7 +28,7 @@ class BrewerPolicy
 
     public function view(?User $user, Brewer $brewer)
     {
-        if(!$brewer->is_visible && $brewer->user !== $user){
+        if(!$brewer->is_visible && $brewer->user !== optional($user)){
             return Response::denyAsNotFound();
         } else {
             return Response::allow();

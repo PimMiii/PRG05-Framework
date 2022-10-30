@@ -24,11 +24,12 @@ class CategoryPolicy
     }
 
 
-    public function view(Category $category)
+    public function view(?User $user,Category $category)
     {
         if(!$category->is_visible){
             return Response::denyAsNotFound();
-        } else {
+        }
+        else {
             return Response::allow();
         }
     }

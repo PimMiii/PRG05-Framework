@@ -26,7 +26,7 @@ class BeerPolicy
 
     public function view(?User $user, Beer $beer)
     {
-        if($beer->brewer->user_id === $user->id){
+        if($beer->brewer->user_id === optional($user)->id){
             return Response::allow();
         } elseif(!$beer->is_visible) {
             return Response::denyAsNotFound();
@@ -40,7 +40,7 @@ class BeerPolicy
     {
         return isset($user->brewer)
             ? Response::allow()
-            : Response::deny();
+            : Response::denyAsNotFound();
     }
 
 
@@ -48,7 +48,7 @@ class BeerPolicy
     {
         return $beer->brewer->user_id === $user->id
                 ? Response::allow()
-                : Response::deny();
+                : Response::denyAsNotFound();
 
     }
 
@@ -57,25 +57,25 @@ class BeerPolicy
     {
         return $beer->brewer->user_id === $user->id
             ? Response::allow()
-            : Response::deny();
+            : Response::denyAsNotFound();
     }
 
 
     public function restore(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
 
     public function forceDelete(User $user)
     {
-        return Response::denyWithStatus(404);
+        return Response::denyAsNotFound();
     }
 
     public function toggleVisibility(User $user, Beer $beer)
     {
         return $beer->brewer->user_id === $user->id
             ? Response::allow()
-            : Response::deny();
+            : Response::denyAsNotFound();
     }
 }

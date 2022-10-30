@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 
 class UserController extends Controller
@@ -11,46 +12,43 @@ class UserController extends Controller
 
     public function view(User $profile)
     {
-        if(\Auth::user()->can('profile-view', $profile)) {
+        $this->authorize('view', $profile);
+
             return view('profile.show', compact('profile'));
-        }
-        return abort(404);
+
     }
 
     public function edit(User $profile)
     {
-        if(\Auth::user()->can('profile-edit', $profile)) {
+        $this->authorize('update', $profile);
             return view('profile.edit', compact('profile'));
-        }
-        return abort(404);
+
+
+
     }
 
 
-    public function update(Request $request, User $user)
+    public function update(Request $request, User $profile)
     {
-        if(\Auth::user()->cannot('profile-edit', $user)) {
-            return abort(404);
-        }
+        $this->authorize('update', $profile);
         $validated = $this->validate($request,
             [
                 'name' => 'bail|required',
                 'email' => 'bail|required|',
             ]);
-        $user->name = $validated['name'];
-        $user->email = $validated['email'];
-        $user->update();
-        return redirect(route('profile.show', $user->id));
+        $profile->name = $validated['name'];
+        $profile->email = $validated['email'];
+        $profile->update();
+        return redirect(route('profile.show', $profile->id));
     }
 
-    public function updateVerified(Request $request, User $user)
+    public function updateVerified(Request $request, User $profile)
     {
-        if(\Auth::user()->cannot('profile-verify', $user)) {
-            return abort(404);
-        }
+        $this->authorize('update', $profile);
 
-        if(!$user->is_verified){
-            $user->is_verified = 1;
-            $user->save();
+        if(!$profile->is_verified){
+            $profile->is_verified = 1;
+            $profile->save();
         }
         return back();
     }

@@ -37,12 +37,11 @@ class UserPolicy
 
     public function verify(User $user, User $profile)
     {
-       if(!$user->is_verified){
-           if(!$profile->is_verified){
-               return Response::allow();
-           }
-       }
-       return Response::denyAsNotFound();
+        if($user->id === $profile->id){
+            return Response::allow();
+        } else {
+            return Response::denyAsNotFound();
+        }
     }
 
 

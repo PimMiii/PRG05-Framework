@@ -43,7 +43,7 @@ class AuthServiceProvider extends ServiceProvider
             return $user->is_admin;
         });
         Gate::define('profile-view', [UserPolicy::class, 'view']);
-        Gate::define('profile-edit', [UserPolicy::class, 'update']);
-        Gate::define('profile-verify', [UserPolicy::class, 'verify']);
+        Gate::define('profile-view', [UserPolicy::class, 'update']);
+        Gate::define('profile-view', [UserPolicy::class, 'verify']);
     }
 }
