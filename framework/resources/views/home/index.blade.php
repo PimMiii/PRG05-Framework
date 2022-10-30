@@ -36,10 +36,9 @@
                                                     </div>
                                                     <h5 class="card-text">
                                                         @foreach($beer->categories as $category)
-                                                            <a href="{{route('categories.show', $category->id)}}"><span
-                                                                    class="badge text-bg-warning">{{$category->name}}</span></a>
-                                                            @if($beer->categories->count() > 1)
-                                                                ,
+                                                            @if($category->is_visible)
+                                                                <a href="{{route('categories.show', $category->id)}}"><span
+                                                                        class="badge text-bg-warning">{{$category->name}}</span></a>
                                                             @endif
                                                         @endforeach
                                                     </h5>

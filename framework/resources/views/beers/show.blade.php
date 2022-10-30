@@ -33,15 +33,16 @@
                                                 /10</h2>
                                         </div>
                                     </div>
-
-                                            <h5 class="card-text">Brouwer: <a href="{{route('brewers.show', $beer->brewer->id)}}">{{$beer->brewer->name}}</a></h5>
-
+                                    @if($beer->brewer->is_visible)
+                                        <h5 class="card-text">Brouwer: <a
+                                                href="{{route('brewers.show', $beer->brewer->id)}}">{{$beer->brewer->name}}</a>
+                                        </h5>
+                                    @endif
                                     <h5 class="card-text">Categorieën:
                                         @foreach($beer->categories as $category)
-                                            <a href="{{route('categories.show', $category->id)}}"><span
-                                                    class="badge text-bg-warning">{{$category->name}}</span></a>
-                                            @if($beer->categories->count() > 1)
-                                                ,
+                                            @if($category->is_visible)
+                                                <a href="{{route('categories.show', $category->id)}}"><span
+                                                        class="badge text-bg-warning">{{$category->name}}</span></a>
                                             @endif
                                         @endforeach
                                     </h5>

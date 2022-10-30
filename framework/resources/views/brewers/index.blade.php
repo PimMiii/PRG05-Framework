@@ -35,7 +35,7 @@
                                                     @can('update', $brewer)
                                                         <div class="col">
                                                             <a class="btn btn-outline-warning"
-                                                               href="{{route('categories.edit', $brewer->id)}}">Aanpassen</a>
+                                                               href="{{route('brewers.edit', $brewer->id)}}">Aanpassen</a>
                                                         </div>
                                                     @endcan
                                                 </div>
