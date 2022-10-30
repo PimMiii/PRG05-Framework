@@ -19,7 +19,9 @@ class BrewerController extends Controller
     public function create()
     {
         if (\Auth::user()->is_admin){
-            $users = User::verified()->orderBy('name')->get();
+            $users = User::verified()
+                ->orderBy('name')
+                ->paginate(5);
             return view('brewers.create', compact('users'));
         }
         return view('brewers.create');

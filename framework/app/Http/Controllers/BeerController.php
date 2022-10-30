@@ -18,7 +18,7 @@ class BeerController extends Controller
             ->filter(\request(['search', 'searchCategory']))
             ->visible()
             ->orderByDesc('updated_at')
-            ->get();
+            ->paginate(5);
 
         return view('beers.index', compact('beers', 'categories'));
     }

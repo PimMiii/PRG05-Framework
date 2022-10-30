@@ -15,7 +15,6 @@
                             </div>
                         </div>
                     </div>
-                    <p></p>
                 @endcan
                 <ul class="list-group list-group-flush">
                     @foreach($brewers as $brewer)
@@ -76,11 +75,18 @@
                                                                 </div>
                                                             </li>
                                                         @endif
-                                @endforeach
+                                                    @endforeach
                                                 </ul>
+                                            </div>
+                                        </div>
+                    @endforeach
+                        <li class="list-group-item">
+                            <div class="position-absolute start-50 translate-middle-x" style="scale: 1.1;">
+                                {{ $brewers->onEachSide(3)->links()}}
+                                <br>
                             </div>
-                        </div>
-                @endforeach
+                        </li>
+                </ul>
             </div>
         </div>
     </div>

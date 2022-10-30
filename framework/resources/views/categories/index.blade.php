@@ -82,6 +82,12 @@
                                         </div>
                         </li>
                     @endforeach
+                        <li class="list-group-item">
+                            <div class="position-absolute start-50 translate-middle-x" style="scale: 1.1;">
+                                {{ $categories->onEachSide(3)->links()}}
+                                <br>
+                            </div>
+                        </li>
                 </ul>
             </div>
         </div>

@@ -14,40 +14,32 @@
                         @if(request(['searchCategory']))
                             @php
                                 $reqSearch = request(['searchCategory'][0]);
-                                /*dd($reqSearch)*/
                             @endphp
                             @foreach($categories as $category)
+                                @if(in_array($category->id, $reqSearch))
 
-                                      @if(in_array($category->id, $reqSearch))
+                                    <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                           id="category-{{$category->id}}" value="{{$category->id}}" checked>
 
-                                        <input class="btn-check" name="searchCategory[]" type="checkbox"
-                                               id="category-{{$category->id}}" value="{{$category->id}}" checked>
+                                    <label class="btn btn-outline-success"
+                                           for="category-{{$category->id}}">{{$category->name}}</label>
+                                @else
+                                    <input class="btn-check" name="searchCategory[]" type="checkbox"
+                                           id="category-{{$category->id}}" value="{{$category->id}}">
 
-                                        <label class="btn btn-outline-success"
-                                               for="category-{{$category->id}}">{{$category->name}}</label>
-                                    @else
-                                        <input class="btn-check" name="searchCategory[]" type="checkbox"
-                                               id="category-{{$category->id}}" value="{{$category->id}}">
-
-                                        <label class="btn btn-outline-success"
-                                               for="category-{{$category->id}}">{{$category->name}}</label>
-                                    @endif
-                                @endforeach
-                           {{-- @endforeach--}}
-
-                       @else
+                                    <label class="btn btn-outline-success"
+                                           for="category-{{$category->id}}">{{$category->name}}</label>
+                                @endif
+                            @endforeach
+                        @else
                             @foreach($categories as $category)
                                 <input class="btn-check" name="searchCategory[]" type="checkbox"
                                        id="category-{{$category->id}}" value="{{$category->id}}">
 
                                 <label class="btn btn-outline-success"
                                        for="category-{{$category->id}}">{{$category->name}}</label>
-
                             @endforeach
-
-                       @endif
-
-
+                        @endif
                     </div>
                 </div>
                 <div class="col-1 gx-1">

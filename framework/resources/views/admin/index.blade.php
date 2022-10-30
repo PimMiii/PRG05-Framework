@@ -11,7 +11,7 @@
                         <div class="card-header">
                             <h2 class="card-title">Bieren</h2>
                         </div>
-                        <ul class="list-group">
+                        <ul class="list-group list-group-flush">
                             @foreach($beers as $beer)
                                 <li class="list-group-item">
                                     <div class="row">
@@ -52,23 +52,49 @@
                         </ul>
                     </div>
                 </div>
-                {{--Users--}}
+                {{--Brewers--}}
                 <div class="col-sm">
-                    <div class="card border border-danger">
-                        <div class="card-header"><h2 class="card-title">Gebruikers</h2></div>
-                        <ul class="list-group">
-                            @foreach($users as $user)
+                    <div class="card border border-success">
+                        <div class="card-header"><h2 class="card-title">Brouwerijen</h2></div>
+                        <ul class="list-group list-group-flush">
+                            @foreach($brewers as $brewer)
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <div class="col">
-                                            <h5 class="card-text">{{$user->name}}
-                                                @if($user->is_admin)
-                                                    <span class="badge text-bg-danger">Admin</span>
+                                        <div class="col-6">
+                                            <h5 class="card-text">{{$brewer->name}}
+                                                @if($brewer->beers)
+                                                    <span
+                                                        class="badge text-bg-info">{{$brewer->beers->count()}}</span>
+                                                @endif</h5>
+                                        </div>
+                                        <div class="col-3">
+                                            <a
+                                                @if($brewer->is_visible)
+                                                    class="btn btn-success"
+                                                @else
+                                                    class="btn btn-danger"
                                                 @endif
-                                                @if($user->is_verified)
-                                                    <span class="badge text-bg-success">Verified</span>
+                                                href="{{route('brewers.update-visibility', $brewer->id)}}"
+                                                onclick="event.preventDefault();
+                                                     document.getElementById('{{$brewer->id}}-brewer-visibility-form').submit();">
+                                                @if($brewer->is_visible)
+                                                    Zichtbaar
+                                                @else
+                                                    Onzichtbaar
                                                 @endif
-                                            </h5>
+                                            </a>
+                                            <form id="{{$brewer->id}}-brewer-visibility-form"
+                                                  action="{{route('brewers.update-visibility', $brewer->id)}}"
+                                                  method="POST"
+                                                  class="d-none">
+                                                @csrf
+                                                @method('PATCH')
+                                                <input hidden name="id" value="{{$brewer->id}}">
+                                            </form>
+                                        </div>
+                                        <div class="col-3">
+                                            <a class="btn btn-warning"
+                                               href="{{route('brewers.edit', $brewer->id)}}">Aanpassen</a>
                                         </div>
                                     </div>
                                 </li>
@@ -76,14 +102,13 @@
                         </ul>
                     </div>
                 </div>
-
             </div>
             <div class="row g-1">
                 {{--Categories--}}
                 <div class="col-sm">
                     <div class="card border border-info">
                         <div class="card-header"><h2 class="card-title">Categorieën</h2></div>
-                        <ul class="list-group">
+                        <ul class="list-group list-group-flush">
                             @foreach($categories as $category)
                                 <li class="list-group-item">
                                     <div class="row">
@@ -129,50 +154,23 @@
                         </ul>
                     </div>
                 </div>
-
-                {{--Brewers--}}
+                {{--Users--}}
                 <div class="col-sm">
-                    <div class="card border border-success">
-                        <div class="card-header"><h2 class="card-title">Brouwerijen</h2></div>
-                        <ul class="list-group">
-                            @foreach($brewers as $brewer)
+                    <div class="card border border-danger">
+                        <div class="card-header"><h2 class="card-title">Gebruikers</h2></div>
+                        <ul class="list-group list-group-flush">
+                            @foreach($users as $user)
                                 <li class="list-group-item">
                                     <div class="row">
-                                        <div class="col-6">
-                                            <h5 class="card-text">{{$brewer->name}}
-                                                @if($brewer->beers)
-                                                    <span
-                                                        class="badge text-bg-info">{{$brewer->beers->count()}}</span>
-                                                @endif</h5>
-                                        </div>
-                                        <div class="col-3">
-                                            <a
-                                                @if($brewer->is_visible)
-                                                    class="btn btn-success"
-                                                @else
-                                                    class="btn btn-danger"
+                                        <div class="col">
+                                            <h5 class="card-text">{{$user->name}}
+                                                @if($user->is_admin)
+                                                    <span class="badge text-bg-danger">Admin</span>
                                                 @endif
-                                                href="{{route('brewers.update-visibility', $brewer->id)}}"
-                                                onclick="event.preventDefault();
-                                                     document.getElementById('{{$brewer->id}}-brewer-visibility-form').submit();">
-                                                @if($brewer->is_visible)
-                                                    Zichtbaar
-                                                @else
-                                                    Onzichtbaar
+                                                @if($user->is_verified)
+                                                    <span class="badge text-bg-success">Verified</span>
                                                 @endif
-                                            </a>
-                                            <form id="{{$brewer->id}}-brewer-visibility-form"
-                                                  action="{{route('brewers.update-visibility', $category->id)}}"
-                                                  method="POST"
-                                                  class="d-none">
-                                                @csrf
-                                                @method('PATCH')
-                                                <input hidden name="id" value="{{$brewer->id}}">
-                                            </form>
-                                        </div>
-                                        <div class="col-3">
-                                            <a class="btn btn-warning"
-                                               href="{{route('brewers.edit', $brewer->id)}}">Aanpassen</a>
+                                            </h5>
                                         </div>
                                     </div>
                                 </li>
