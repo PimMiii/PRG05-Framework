@@ -68,7 +68,7 @@ jobs:
           passphrase: ${{ secrets.SERVER_SSH_PASS }}
           port: ${{ matrix.server.port }}
           source: ${{ github.sha }}.tar.gz
-          target: ${{ matrix.server.path }}/artifacts
+          target: ${{ matrix.server.path }}/artifacts/
 
 
 
