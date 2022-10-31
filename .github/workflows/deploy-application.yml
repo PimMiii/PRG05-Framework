@@ -55,20 +55,20 @@ jobs:
     strategy:
       matrix:
         server: ${{ fromJson(needs.create-deployment-artifacts.output.deployment-matrix) }}
-        steps:
-          - uses: actions/download-artifact@v2
-            with:
-              name: app-build
-          - name: Upload
-            uses: appleboy/scp-action@master
-            with:
-              host: ${{ matrix.server.ip }}
-              username: ${{ secrets.SERVER_USER }}
-              key: ${{ secrets.SERVER_SSH_KEY }}
-              passphrase: ${{ secrets.SERVER_SSH_PASS }}
-              port: ${{ matrix.server.port }}
-              source: ${{ github.sha }}.tar.gz
-              target: ${{ matrix.server.path }}/artifacts
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: app-build
+      - name: Upload
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ matrix.server.ip }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SERVER_SSH_KEY }}
+          passphrase: ${{ secrets.SERVER_SSH_PASS }}
+          port: ${{ matrix.server.port }}
+          source: ${{ github.sha }}.tar.gz
+          target: ${{ matrix.server.path }}/artifacts
 
 
 
