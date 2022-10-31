@@ -44,9 +44,9 @@ jobs:
         run: |
           JSON="$(cat ./deployment-config.json)"
           JSON="${JSON//'%'/'%25'}"
-          JSON="${JSON//$'\n'/'%0A'}"
-          JSON="${JSON//$'\r'/'%0D'}"
-          echo "::set-output name=deployment-matrix::$JSON"
+          JSON="${JSON//'\n'/'%0A'}"
+          JSON="${JSON//'\r'/'%0D'}"
+          echo "::set-output name=deployment-matrix::$(echo $JSON)"
 
   prepare-release-on-servers:
     name: "${{ matrix.server.name }}: Prepare release"
