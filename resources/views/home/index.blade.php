@@ -16,21 +16,21 @@
                                         @cannot('update', $beer)
                                             <div class="card border border-info">
                                                 @endcan
-                                                <div class="card-body">
-                                                    <div class="row  card-header">
+                                                    <div class="card-header">
                                                         <div class="col">
                                                             <h1>
                                                                 <a href="{{route('beers.show', $beer->id)}}">{{$beer->name}}</a>
                                                             </h1>
                                                         </div>
                                                     </div>
+                                                <div class="card-body">
                                                     <div class="row">
                                                         <div class="col-8">
                                                             <h2 class="card-text">🍺{{number_format($beer->percentage/100, 2)}}
                                                                 %</h2>
                                                         </div>
                                                         <div class="col">
-                                                            <h2 class="card-title">
+                                                            <h2 class="card-text">
                                                                 💕{{number_format($beer->calculateRating(), 1)}}/10</h2>
                                                         </div>
                                                     </div>
